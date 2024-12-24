@@ -63,7 +63,6 @@
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
   
   hardware.graphics.enable = true;
@@ -132,6 +131,7 @@
     ripgrep
     irust
     bacon
+    p7zip
 
     #for hyprland
     waybar

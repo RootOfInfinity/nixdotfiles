@@ -7,5 +7,6 @@
     ./alacritty.nix
     ./zoxide.nix
     ./hyprland.nix
+    ./waybar.nix
   ];
 }
