@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # init wallpaper daemon
-swww init &
+swww-daemon init &
 # set wallpaper
-swww img ../files/nix-wallpaper.png &
+swww img ~/nix/home-manager/files/nix-wallpaper.png &
 
 #for managing network
 nm-applet --indicator &
