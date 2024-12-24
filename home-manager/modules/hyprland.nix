@@ -224,13 +224,13 @@ bind = [
   "$mainMod, V, togglefloating,"
   "$mainMod, R, exec, $menu"
   "$mainMod, P, pseudo," # dwindle"
-  "$mainMod, J, togglesplit, # dwindle"
+  "$mainMod, U, togglesplit, # dwindle"
   "$mainMod, S, exec, rofi -show drun -show-icons"
   # Move focus with mainMod + arrow keys
-  "$mainMod, left, movefocus, l"
-  "$mainMod, right, movefocus, r"
-  "$mainMod, up, movefocus, u"
-  "$mainMod, down, movefocus, d"
+  "$mainMod, H, movefocus, l"
+  "$mainMod, L, movefocus, r"
+  "$mainMod, K, movefocus, u"
+  "$mainMod, J, movefocus, d"
   # Switch workspaces with mainMod + [0-9]
   "$mainMod, 1, workspace, 1"
   "$mainMod, 2, workspace, 2"
