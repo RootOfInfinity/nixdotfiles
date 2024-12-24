@@ -136,6 +136,7 @@
     libnotify
     swww
     rofi-wayland
+    networkmanagerapplet
     
 
   ];
