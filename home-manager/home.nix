@@ -13,5 +13,11 @@
   imports = [
     ./modules/bundle.nix
   ];
+  programs.librewolf = {
+    enable = true;
+    settings = {
+      "webgl.disabled" = false;
+    };
+  };
 
 }
