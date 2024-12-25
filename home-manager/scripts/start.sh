@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # init wallpaper daemon
-swww-daemon init &
+swww-daemon &
 # set wallpaper
 swww img ~/nix/home-manager/files/nix-wallpaper.png &
 

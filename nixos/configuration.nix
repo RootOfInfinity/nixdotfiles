@@ -110,6 +110,9 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "BigBlueTerminal" ]; })
+  ];
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     helix
@@ -132,6 +135,10 @@
     irust
     bacon
     p7zip
+    image-roll
+    killall
+    vscode-langservers-extracted
+    pwvucontrol
 
     #for hyprland
     waybar

@@ -226,7 +226,8 @@ bind = [
   "$mainMod, P, pseudo," # dwindle"
   "$mainMod, U, togglesplit, # dwindle"
   "$mainMod, S, exec, rofi -show drun -show-icons"
-  # Move focus with mainMod + arrow keys
+  "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
+  # Move focus with mainMod + hjkl
   "$mainMod, H, movefocus, l"
   "$mainMod, L, movefocus, r"
   "$mainMod, K, movefocus, u"
@@ -254,8 +255,8 @@ bind = [
   "$mainMod SHIFT, 9, movetoworkspace, 9"
   "$mainMod SHIFT, 0, movetoworkspace, 10"
   # Example special workspace (scratchpad)
-  "$mainMod, S, togglespecialworkspace, magic"
-  "$mainMod SHIFT, S, movetoworkspace, special:magic"
+  # "$mainMod, S, togglespecialworkspace, magic"
+  # "$mainMod SHIFT, S, movetoworkspace, special:magic"
   # Scroll through existing workspaces with mainMod + scroll
   "$mainMod, mouse_down, workspace, e+1"
   "$mainMod, mouse_up, workspace, e-1"
