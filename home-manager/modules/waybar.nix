@@ -67,11 +67,11 @@
         };
         pulseaudio = {
             # // "scroll-step": 1, // %, can be a float
-            format = "{volume}% {icon} {format_source}";
+            format = "{volume}% {icon}";
             format-bluetooth = "{volume}% {icon} {format_source}";
             format-bluetooth-muted = " {icon} {format_source}";
             format-muted = " {format_source}";
-            format-source = "{volume}% ";
+            # format-source = "{volume}% ";
             format-source-muted = "";
             format-icons = {
                 headphone = "";
@@ -99,14 +99,7 @@
         "custom/power" = {
             format = "⏻ ";
         		tooltip = false;
-        		menu = "on-click";
-        		menu-file = "$HOME/.config/waybar/power_menu.xml"; # // Menu file in resources folder
-        		menu-actions = {
-        			shutdown = "shutdown";
-        			reboot = "reboot";
-        			suspend = "systemctl suspend";
-        			hibernate = "systemctl hibernate";
-        		};
+            on-click = "wlogout";
         };
 
     };  

@@ -139,6 +139,9 @@
     killall
     vscode-langservers-extracted
     pwvucontrol
+    wlogout
+    cava
+    pipes-rs
 
     #for hyprland
     waybar
