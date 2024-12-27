@@ -21,6 +21,10 @@
     options = "--delete-older-than 30d";
   };
 
+  # services.flatpak.enable = true;
+  programs.steam.enable = true;
+
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -142,6 +146,20 @@
     wlogout
     cava
     pipes-rs
+    cmus
+    jq
+    grim
+    slurp
+    wl-clipboard
+    hyprshot
+    hyprpicker
+    inetutils
+    steam-tui
+    steamcmd
+    obs-studio
+    xfce.thunar
+    ranger
+    
 
     #for hyprland
     waybar

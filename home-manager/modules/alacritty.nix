@@ -9,6 +9,10 @@
           style = "Regular";
         };
       };
+      window = {
+        opacity = 0.8;
+        blur = true;
+      };
     };
   };
 }

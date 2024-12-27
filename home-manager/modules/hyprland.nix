@@ -30,8 +30,9 @@ monitor = ",preferred,auto,auto";
 
 # Set programs that you use
 "$terminal" = "alacritty";
-"$fileManager" = "dolphin";
-"$menu" = "wofi --show drun";
+"$fileManager" = "alacritty -e ranger";
+"$guiFileManager" = "thunar";
+"$menu" = "rofi -show drun -show-icons";
 
 
 #################
@@ -220,12 +221,15 @@ bind = [
   "$mainMod, Q, exec, $terminal"
   "$mainMod, C, killactive,"
   "$mainMod, M, exit,"
-  "$mainMod, E, exec, $fileManager"
+  "$mainMod, E, exec, $guiFileManager"
+  "$mainMod, F, exec, $fileManager"
   "$mainMod, V, togglefloating,"
   "$mainMod, R, exec, $menu"
-  "$mainMod, P, pseudo," # dwindle"
+  # "$mainMod, P, pseudo," # dwindle"
+  "$mainMod, PRINT, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
+  " , PRINT, exec, hyprshot -m output -o ~/Pictures/Screenshots"
+  "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o ~/Pictures/Screenshots -z"
   "$mainMod, U, togglesplit, # dwindle"
-  "$mainMod, S, exec, rofi -show drun -show-icons"
   "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
   # Move focus with mainMod + hjkl
   "$mainMod, H, movefocus, l"

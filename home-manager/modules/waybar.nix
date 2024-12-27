@@ -14,9 +14,10 @@
         modules-left = [
             # "wlr/taskbar"
             # "group/quicklinks"
-            # "hyprland/window"
+            "hyprland/window"
         ];
         modules-center = [
+            "hyprland/workspaces"
         ];
         modules-right = [
             "pulseaudio"
@@ -28,6 +29,14 @@
             "tray"
             "custom/power"
         ];
+
+        "hyprland/window" = {
+            format = "{title}";
+            icon = true;
+        };
+        "hyprland/workspaces" = {
+            format = "-{name}-";
+        };
         # // Modules configuration
         keyboard-state = {
             numlock = true;
@@ -141,10 +150,25 @@
             border-bottom: 3px solid white;
         }
 
-        #clock, #pulseaudio, #cpu, #memory, #keyboard-state {
+        #clock, #pulseaudio, #cpu, #memory, #keyboard-state, #workspaces {
             background-color: #64727D;
             border-radius: 20;
             padding: 5px;
+            color: white;
+        }
+
+        #workspaces {
+            color: #64727D;
+        }
+
+        #workspaces button {
+            color: white;
+            background-color: #677580;
+            border-radius: 20;
+        }
+
+        #workspaces button {
+            color: #FFFFFF;
         }
 
 

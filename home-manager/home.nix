@@ -1,13 +1,16 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, pkgs-unstable, pkgs-old, ... }: {
   home = {
     username = "rootofinfinity";
     homeDirectory = "/home/rootofinfinity";
     stateVersion = "24.11";
 
-    packages = with pkgs; [
-      cmatrix
-      nsnake
+    packages = [
+      pkgs.cmatrix
+      pkgs.nsnake
+      pkgs-unstable.flatpak
+      pkgs-unstable.gnome-software
     ];
+
   };
   
   imports = [
