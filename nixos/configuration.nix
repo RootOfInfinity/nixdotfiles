@@ -23,6 +23,8 @@
 
   # services.flatpak.enable = true;
   programs.steam.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
 
   # Use the systemd-boot EFI boot loader.
@@ -159,6 +161,9 @@
     obs-studio
     xfce.thunar
     ranger
+    usbutils
+    udiske
+    udisks
     
 
     #for hyprland
