@@ -2,7 +2,7 @@
   programs.nushell = {
     enable = true;
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ~/nix";
+      rebuild = "sudo nixos-rebuild switch --flake ~/nix --impure";
       homebuild = "home-manager switch --flake ~/nix";
       cd = "z";
     };

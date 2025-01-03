@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Allow unfree software
@@ -23,6 +23,7 @@
 
   # services.flatpak.enable = true;
   programs.steam.enable = true;
+  services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
@@ -162,7 +163,7 @@
     xfce.thunar
     ranger
     usbutils
-    udiske
+    udiskie
     udisks
     
 
