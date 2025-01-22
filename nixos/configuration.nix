@@ -15,17 +15,27 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
+
   nix.gc = {
     automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+    dates = "daily";
+    options = "--delete-older-than 10d";
   };
+
+  nix.settings.auto-optimise-store = true;
+
 
   # services.flatpak.enable = true;
   programs.steam.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  virtualisation.docker.enable = true;
 
 
   # Use the systemd-boot EFI boot loader.
@@ -37,6 +47,11 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
+  networking.extraHosts = ''
+    54.236.113.205 registry-1.docker.io
+    54.198.86.24 registry-1.docker.io
+    54.227.20.253 registry-1.docker.io
+  '';
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -165,6 +180,18 @@
     usbutils
     udiskie
     udisks
+    rustup
+    gcc
+    btop
+    feh
+    unzip
+    burpsuite
+    r2modman
+    steam-run-free
+    zulu23
+    ghidra
+    gdb
+    gef
     
 
     #for hyprland
@@ -174,6 +201,13 @@
     swww
     rofi-wayland
     networkmanagerapplet
+
+    # docker stuff
+    docker_26
+    dockerfile-language-server-nodejs
+    docker-compose-language-service
+    yaml-language-server
+    mysql-workbench
     
 
   ];

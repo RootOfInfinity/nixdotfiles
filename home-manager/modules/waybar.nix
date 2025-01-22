@@ -4,7 +4,7 @@
     settings = {
 # -*- mode: jsonc -*-
     mainBar = {
-        layer = "top";
+        layer = "bottom";
         position = "top"; 
         #// Waybar height (to be removed for auto height)
         height = 30;
