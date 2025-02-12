@@ -28,6 +28,9 @@
 
   nix.settings.auto-optimise-store = true;
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
 
   # services.flatpak.enable = true;
   programs.steam.enable = true;
@@ -47,11 +50,11 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  networking.extraHosts = ''
-    54.236.113.205 registry-1.docker.io
-    54.198.86.24 registry-1.docker.io
-    54.227.20.253 registry-1.docker.io
-  '';
+  # networking.extraHosts = ''
+  #   54.236.113.205 registry-1.docker.io
+  #   54.198.86.24 registry-1.docker.io
+  #   54.227.20.253 registry-1.docker.io
+  # '';
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -192,6 +195,9 @@
     ghidra
     gdb
     gef
+    crawl
+    pkg-config
+    bluetuith
     
 
     #for hyprland

@@ -8,5 +8,6 @@
     ./zoxide.nix
     ./hyprland.nix
     ./waybar.nix
+    ./cmus.nix
   ];
 }
