@@ -198,6 +198,7 @@
     crawl
     pkg-config
     bluetuith
+    pulsemixer
     
 
     #for hyprland

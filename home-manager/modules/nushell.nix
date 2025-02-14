@@ -3,7 +3,7 @@
     enable = true;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/nix --impure";
-      # upgrade = "sudo nixos-rebuild switch --flake ~/nix --impure --upgrade";
+      upgrade = "sudo nixos-rebuild switch --flake ~/nix --impure --upgrade";
       homebuild = "home-manager switch --flake ~/nix";
       cd = "z";
     };
