@@ -38,7 +38,7 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
 
 
   # Use the systemd-boot EFI boot loader.
@@ -199,6 +199,7 @@
     pkg-config
     bluetuith
     pulsemixer
+    zathura
     
 
     #for hyprland

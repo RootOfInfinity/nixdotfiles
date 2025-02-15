@@ -91,7 +91,7 @@
                 car = "";
                 default = ["" "" ""];
             };
-            on-click = "pwvucontrol";
+            on-click = "pulsemixer";
         };
         "custom/media" = {
             format = "{icon} {text}";
