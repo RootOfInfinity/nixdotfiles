@@ -29,10 +29,16 @@
   nix.settings.auto-optimise-store = true;
 
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
+  # hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Experimental = true;
+    };
+  };
+  
 
 
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
   programs.steam.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
@@ -183,7 +189,7 @@
     usbutils
     udiskie
     udisks
-    rustup
+    
     gcc
     btop
     feh
@@ -200,6 +206,7 @@
     bluetuith
     pulsemixer
     zathura
+    
     
 
     #for hyprland
