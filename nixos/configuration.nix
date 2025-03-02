@@ -19,7 +19,7 @@
     enable = true;
     dates = "weekly";
   };
-
+  
   nix.gc = {
     automatic = true;
     dates = "daily";
@@ -36,7 +36,11 @@
     };
   };
   
-
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
 
   services.flatpak.enable = true;
   programs.steam.enable = true;
@@ -55,6 +59,61 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.nameservers = [ "8.8.8.8" ];
+  # networking.defaultGateway6 = {
+  #   address = "fe80::1";
+  #   interface = "enp2s0";
+  # };
+
+  # networking = {
+  #   nameservers = [ "127.0.0.1" "::1" ];
+  #   networkmanager.dns = "none";
+  # };
+
+  # services.dnscrypt-proxy2 = {
+  #   enable = true;
+  #   settings = {
+  #     ipv6_servers = true;
+  #     require_dnssec = true;
+  #     query_log.file = "/var/log/dnscrypt-proxy/query.log"; # tests if it works
+  #     sources.public-resolvers = {
+  #       urls = [
+  #         "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+  #         "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"        
+  #       ];
+  #       cache_file = "/var/cache/dnscrypt-proxy/public-resolvers.md";
+  #       minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";      
+  #     };
+  #   server_names = [ "sdns://AgMAAAAAAAAABzEuMS4xLjIABzEuMS4xLjIKL2Rucy1xdWVyeQ" "sdns://AgMAAAAAAAAABzEuMC4wLjIABzEuMC4wLjIKL2Rucy1xdWVyeQ" ];
+  #   };
+  # };
+
+
+  # services.stubby = {
+  #   enable = true;
+  #   settings = pkgs.stubby.passthru.settingsExample // {
+  #     upstream_recursive_servers = [{
+  #       address_data = "1.1.1.1";
+  #       tls_auth_name = "cloudflare-dns.com";
+  #       tls_pubkey_pinset = [{
+  #         digest = "sha256";
+  #         value = "SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=";
+  #       }];
+  #     } {
+  #       address_data = "1.0.0.1";
+  #       tls_auth_name = "cloudflare-dns.com";
+  #       tls_pubkey_pinset = [{
+  #         digest = "sha256";
+  #         value = "SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=";
+  #       }];
+  #     }];
+  #   };
+  # };
+  
+  # SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=
+
+
+  networking.enableIPv6 = true;
 
   # networking.extraHosts = ''
   #   54.236.113.205 registry-1.docker.io
@@ -66,7 +125,7 @@
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -189,6 +248,8 @@
     usbutils
     udiskie
     udisks
+    rustup
+    prismlauncher
     
     gcc
     btop
@@ -206,7 +267,7 @@
     bluetuith
     pulsemixer
     zathura
-    
+    # stubby
     
 
     #for hyprland
@@ -215,14 +276,14 @@
     libnotify
     swww
     rofi-wayland
-    networkmanagerapplet
+    # networkmanagerapplet
 
     # docker stuff
-    docker_26
-    dockerfile-language-server-nodejs
-    docker-compose-language-service
-    yaml-language-server
-    mysql-workbench
+    # docker_26
+    # dockerfile-language-server-nodejs
+    # docker-compose-language-service
+    # yaml-language-server
+    # mysql-workbench
     
 
   ];

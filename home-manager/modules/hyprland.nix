@@ -19,7 +19,10 @@
 ################
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor = ",preferred,auto,auto";
+monitor = [
+  "DP-1, 1920x1080, 1920x0, 1"
+  "HDMI-A-1, 1920x1080, 0x0, 1"
+];
 
 
 ###################
@@ -236,6 +239,17 @@ bind = [
   "$mainMod, L, movefocus, r"
   "$mainMod, K, movefocus, u"
   "$mainMod, J, movefocus, d"
+  # Gonna make movable + resizeable windows with keyboard.
+  "$mainMod SHIFT, right, resizeactive, 10 0"
+  "$mainMod SHIFT, left, resizeactive, -10 0"
+  "$mainMod SHIFT, up, resizeactive, 0 -10"
+  "$mainMod SHIFT, down, resizeactive, 0 10"
+
+  "$mainMod, right, movewindow, r"
+  "$mainMod, left, movewindow, l"
+  "$mainMod, up, movewindow, u"
+  "$mainMod, down, movewindow, d"
+  
   # Switch workspaces with mainMod + [0-9]
   "$mainMod, 1, workspace, 1"
   "$mainMod, 2, workspace, 2"
