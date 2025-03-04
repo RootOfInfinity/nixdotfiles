@@ -50,6 +50,12 @@
 
   # virtualisation.docker.enable = true;
 
+  # Virtual Machine manager
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "rootofinfinity" ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -267,6 +273,7 @@
     bluetuith
     pulsemixer
     zathura
+    qemu_full
     # stubby
     
 

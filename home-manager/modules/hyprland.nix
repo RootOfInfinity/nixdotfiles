@@ -240,15 +240,15 @@ bind = [
   "$mainMod, K, movefocus, u"
   "$mainMod, J, movefocus, d"
   # Gonna make movable + resizeable windows with keyboard.
-  "$mainMod SHIFT, right, resizeactive, 10 0"
-  "$mainMod SHIFT, left, resizeactive, -10 0"
-  "$mainMod SHIFT, up, resizeactive, 0 -10"
-  "$mainMod SHIFT, down, resizeactive, 0 10"
+  "$mainMod SHIFT, H, resizeactive, -30 0"
+  "$mainMod SHIFT, L, resizeactive, 30 0"
+  "$mainMod SHIFT, K, resizeactive, 0 -30"
+  "$mainMod SHIFT, J, resizeactive, 0 30"
 
-  "$mainMod, right, movewindow, r"
-  "$mainMod, left, movewindow, l"
-  "$mainMod, up, movewindow, u"
-  "$mainMod, down, movewindow, d"
+  "$mainMod CTRL, H, movewindow, l"
+  "$mainMod CTRL, L, movewindow, r"
+  "$mainMod CTRL, K, movewindow, u"
+  "$mainMod CTRL, J, movewindow, d"
   
   # Switch workspaces with mainMod + [0-9]
   "$mainMod, 1, workspace, 1"
