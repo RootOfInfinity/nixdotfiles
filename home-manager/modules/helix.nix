@@ -3,10 +3,23 @@
     enable = true;
     defaultEditor = true;
     languages = {
-      language = [{
+      language = [
+      {
         name = "rust";
         auto-format = true;
-      }];
+        # indent = { tab-width = 4; unit = " "; };
+      }
+      {
+        name = "nix";
+        auto-format = true;
+        # indent = { tab-width = 4; unit = " "; };
+      }
+      {
+        name = "markdown";
+        auto-format = true;
+        indent = { tab-width = 4; unit = " "; };
+      }
+      ];
     };
     settings = {
       editor = {

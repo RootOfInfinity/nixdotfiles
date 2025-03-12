@@ -215,6 +215,7 @@
     wget
     firefox
     librewolf
+    tor-browser
     discord
     discordo
     easyeffects
@@ -256,6 +257,10 @@
     udisks
     rustup
     prismlauncher
+    python3
+    pwntools
+    binwalk
+    exiftool
     
     gcc
     btop
@@ -274,6 +279,7 @@
     pulsemixer
     zathura
     qemu_full
+    keepassxc
     # stubby
     
 
@@ -283,6 +289,7 @@
     libnotify
     swww
     rofi-wayland
+    playerctl
     # networkmanagerapplet
 
     # docker stuff
