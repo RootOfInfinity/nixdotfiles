@@ -5,3 +5,32 @@
         :anchor "top right")
     :stacking "overlay"
     (label :text "TESTUS"))
+
+(defwindow powermenu
+    :monitor 0 
+    :stacking "fg"
+    :windowtype "normal"
+    :wm-ignore true
+    :geometry (geometry
+        :width "50%"
+        :height "100%")
+    (powermenu_layout))
+
+(defwidget powermenu_layout []
+    (label :text "Hello, Powermenu!"))
+
+(defpoll time :interval "5s"
+    :initial `date +'{"hour":"%I","min":"%M","AMorPM":"%p"}'`
+    `date +'{"hour":"%I","min":"%M","AMorPM":"%p"}'`)
+
+(defpoll date :interval "100s"
+    :initial `date +'{"year":"%Y","month":"%m","day":"%d","prettymonth":"%b"}'`
+    `date +'{"year":"%Y","month":"%m","day":"%d","prettymonth":"%b"}'`)
+
+(defpoll net :interval "50s"
+    :initial `N/A`
+    `nmcli -f DEVICE,TYPE,STATE device \
+         | awk '{if($3=="connected" && $1!="lo")print$1" "$2}'`)
+
+(defwidget cpupercent []
+    (label :text "${EWW_CPU.avg}% CPU"))
