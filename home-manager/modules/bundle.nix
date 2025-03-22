@@ -9,5 +9,6 @@
     ./hyprland.nix
     ./waybar.nix
     ./cmus.nix
+    ./eww.nix
   ];
 }

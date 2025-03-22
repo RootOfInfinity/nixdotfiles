@@ -261,6 +261,7 @@
     pwntools
     binwalk
     exiftool
+    onlyoffice-desktopeditors
     
     gcc
     btop
@@ -280,6 +281,9 @@
     zathura
     qemu_full
     keepassxc
+    markdown-oxide
+    lldb_19
+    eww
     # stubby
     
 

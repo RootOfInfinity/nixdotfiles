@@ -11,6 +11,8 @@
       $env.config.show_banner = false
       $env.config.buffer_editor = "hx"
       $env.config.edit_mode = "vi"
+      $env.PROMPT_INDICATOR_VI_NORMAL = ":NORMAL> "
+      $env.PROMPT_INDICATOR_VI_INSERT = ""
       use ~/.cache/starship/init.nu
 
       source ~/.zoxide.nu
