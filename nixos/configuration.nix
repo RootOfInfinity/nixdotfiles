@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      ./stylixconfig.nix
     ];
 
   # Allow unfree software
@@ -36,12 +37,14 @@
     };
   };
   
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
 
+  # stylix = {
+  #   enable = true;
+  #   image = ../home-manager/files/cross-wallpaper.jpg;
+  #   polarity = "dark";
+  # };
+  
+  qt.enable = true;
   services.flatpak.enable = true;
   programs.steam.enable = true;
   services.devmon.enable = true;

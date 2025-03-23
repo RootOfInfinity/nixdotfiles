@@ -22,6 +22,7 @@
       ];
     };
     settings = {
+      theme = "autumn";
       editor = {
         line-number = "relative";
         lsp.display-messages = true;
