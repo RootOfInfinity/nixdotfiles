@@ -1,3 +1,4 @@
+{ pkgs, pkgs-unstable, config, ... }:
 {
   imports = [
     ./helix.nix
@@ -10,5 +11,6 @@
     ./waybar.nix
     ./cmus.nix
     ./eww.nix
+    ./stylix.nix
   ];
 }

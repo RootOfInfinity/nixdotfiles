@@ -3,7 +3,7 @@
 # init wallpaper daemon
 swww-daemon &
 # set wallpaper
-swww img ~/nix/home-manager/files/cross-wallpaper.jpg &
+swww img ~/nix/home-manager/files/CrossGruvbox.png &
 
 #for managing network
 nm-applet --indicator &

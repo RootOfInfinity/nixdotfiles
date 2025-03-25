@@ -3,28 +3,28 @@
   description = "My sys config";
 
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-23.11";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-stable, nixpkgs-old, stylix, ... }: 
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, ... }: 
     let
       system = "x86_64-linux";
     in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        pkgs-stable = import nixpkgs-stable {
+        pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
@@ -37,7 +37,7 @@
 
     homeConfigurations.rootofinfinity = home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
-        pkgs-unstable = import nixpkgs-stable {
+        pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
@@ -47,7 +47,10 @@
         };
       };
       pkgs = nixpkgs.legacyPackages.${system};
-      modules = [ ./home-manager/home.nix ];
+      modules = [
+        ./home-manager/home.nix
+        stylix.homeManagerModules.stylix
+      ];
     };
   };
 }
