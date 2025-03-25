@@ -4,7 +4,7 @@
     enable = true;
     autoEnable = true;
     # homeManagerIntegration.autoImport = true;
-    image = ../home-manager/files/CrossGruvbox.png;
+    image = ../files/CrossGruvbox.png;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     polarity = "dark";
     cursor = {
