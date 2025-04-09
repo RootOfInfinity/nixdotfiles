@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, pkgs-old, ... }: {
+{ config, pkgs, pkgs-unstable, pkgs-old, hyprland, hyprsplit, ... }: {
   home = {
     username = "rootofinfinity";
     homeDirectory = "/home/rootofinfinity";
@@ -9,9 +9,11 @@
       pkgs.nsnake
       pkgs-unstable.flatpak
       pkgs-unstable.gnome-software
+      pkgs.gnome-themes-extra
     ];
 
   };
+
   
   imports = [
     ./modules/bundle.nix

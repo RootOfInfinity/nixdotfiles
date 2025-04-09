@@ -1,6 +1,20 @@
+{ hyprland, hyprsplit, pkgs, ... }:
 {
   wayland.windowManager.hyprland = {
     enable = true;
+
+    ###############
+    ### PLUGINS ###
+    ###############
+
+    plugins = [
+      # split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+      # hyprsplit.packages.default
+      # pkgs.hyprlandPlugins.hyprsplit
+    ];
+
+    # package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+
     settings = {
 # This is an example Hyprland config file.
 # Refer to the wiki for more information.
@@ -20,10 +34,22 @@
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
 monitor = [
-  "DP-1, 1920x1080, 1920x0, 1"
   "HDMI-A-1, 1920x1080, 0x0, 1"
+  "DP-1, 1920x1080, 1920x0, 1"
 ];
 
+workspace = [
+  "1, monitor:HDMI-A-1"
+  "2, monitor:HDMI-A-1"
+  "3, monitor:HDMI-A-1"
+  "4, monitor:HDMI-A-1"
+  "5, monitor:HDMI-A-1"
+  "6, monitor:DP-1"
+  "7, monitor:DP-1"
+  "8, monitor:DP-1"
+  "9, monitor:DP-1"
+  "10, monitor:DP-1"
+];
 
 ###################
 ### MY PROGRAMS ###
@@ -48,6 +74,7 @@ monitor = [
 exec-once = [
   "bash ~/nix/home-manager/scripts/start.sh"
   "hyprctl setcursor Bibata-Modern-Classic 24"
+  "hyprctl dispatch workspace 1"
 ];
 # exec-once = $terminal
 # exec-once = nm-applet &
@@ -236,6 +263,7 @@ bind = [
   " , PRINT, exec, hyprshot -m output -o ~/Pictures/Screenshots"
   "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o ~/Pictures/Screenshots -z"
   "$mainMod, U, togglesplit, # dwindle"
+  # "$mainMod, S, split:swapactiveworkspaces"
   "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
   # Move focus with mainMod + hjkl
   "$mainMod, H, movefocus, l"
@@ -264,6 +292,7 @@ bind = [
   "$mainMod, 8, workspace, 8"
   "$mainMod, 9, workspace, 9"
   "$mainMod, 0, workspace, 10"
+
   # Move active window to a workspace with mainMod + SHIFT + [0-9]
   "$mainMod SHIFT, 1, movetoworkspace, 1"
   "$mainMod SHIFT, 2, movetoworkspace, 2"

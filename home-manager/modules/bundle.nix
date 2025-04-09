@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, config, ... }:
+{ pkgs, pkgs-unstable, config, hyprsplit, ... }:
 {
   imports = [
     ./helix.nix

@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, hyprland, ... }:
 
 {
   imports =
@@ -10,6 +10,9 @@
       /etc/nixos/hardware-configuration.nix
       ./stylixconfig.nix
     ];
+  # hardware.opengl = {
+  #   package = pkgs-unstable.mesa.drivers;
+  # };
 
   # Allow unfree software
   nixpkgs.config.allowUnfree = true;
@@ -46,7 +49,13 @@
   
   qt.enable = true;
   services.flatpak.enable = true;
+
   programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+  # If ya wanna use mangohud, gamescope, or gamemode, put it in the
+  # launch options like `mangohud %command%`
+
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -58,6 +67,8 @@
   users.groups.libvirtd.members = [ "rootofinfinity" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
+
+  virtualisation.waydroid.enable = true;
   
 
   # Use the systemd-boot EFI boot loader.
@@ -162,6 +173,8 @@
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
+    # package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   
   hardware.graphics.enable = true;
@@ -265,6 +278,7 @@
     binwalk
     exiftool
     onlyoffice-desktopeditors
+    mangohud
     
     gcc
     btop
@@ -297,6 +311,7 @@
     swww
     rofi-wayland
     playerctl
+    hyprland-workspaces
     # networkmanagerapplet
 
     # docker stuff
