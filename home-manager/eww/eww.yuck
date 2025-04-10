@@ -1,39 +1,67 @@
-(defwindow notifications
-    :monitor 0
-    :geometry (geometry :x "20px"
-        :y "20px"
-        :anchor "top right")
-    :stacking "overlay"
-    (label :text "TESTUS"))
+; (defwindow notifications
+;     :monitor 0
+;     :geometry (geometry :x "20px"
+;         :y "20px"
+;         :anchor "top right")
+;     :stacking "overlay"
+;     (label :text "TESTUS"))
 
-(defwindow powermenu
-    :monitor 0 
-    :stacking "fg"
-    :windowtype "normal"
-    :wm-ignore true
-    :geometry (geometry
-        :width "50%"
-        :height "100%")
-    (powermenu_layout))
+; (defwindow powermenu
+;     :monitor 0 
+;     :stacking "fg"
+;     :windowtype "normal"
+;     :wm-ignore true
+;     :geometry (geometry
+;         :width "50%"
+;         :height "100%")
+;     (powermenu_layout))
 
-(defwidget powermenu_layout []
-    (label :text "Hello, Powermenu!"))
-
-(defpoll time :interval "5s"
-    :initial `date +'{"hour":"%I","min":"%M","AMorPM":"%p"}'`
-    `date +'{"hour":"%I","min":"%M","AMorPM":"%p"}'`)
-
-(defpoll date :interval "100s"
-    :initial `date +'{"year":"%Y","month":"%m","day":"%d","prettymonth":"%b"}'`
-    `date +'{"year":"%Y","month":"%m","day":"%d","prettymonth":"%b"}'`)
+; (defwidget powermenu_layout []
+;     (label :text "Hello, Powermenu!"))
 
 (defpoll net :interval "50s"
     :initial `N/A`
     `nmcli -f DEVICE,TYPE,STATE device \
          | awk '{if($3=="connected" && $1!="lo")print$1" "$2}'`)
 
-(defwidget cpupercent []
-    (label :text "${EWW_CPU.avg}% CPU"))
+(defwidget netWidget []
+    (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
+        :class "connect_text"))
+
+
+
+(deflisten music :interval "5s"
+    :initial ''
+    `playerctl --follow metadata --format '{{ title }}' || true`)
+
+(defpoll volume :interval "1s"
+    :inital "N/A"
+    `awk -F"'" '/Default/ {print $2}' <(pulsemixer --list-sinks)`)
+
+(defpoll muted :interval "1s"
+    :inital false
+    `~/nix/home-manager/eww/scripts/getmuted.sh`) 
+
+(defwidget musicWidget []
+    (box :orientation "h"
+        :halign "start"
+        (label :text {music != '' ? " ${music} " : "󰝛 LOCKED IN 󰝛"} )
+        (label :text
+            {muted == "true" ? "${volume} "
+                : "${volume} 󰕾"})))
+
+
+
+(defvar ontime true)
+
+(defwidget timeWidget []
+    (button
+        :onclick '~/nix/home-manager/eww/scripts/toggletimevar.sh'
+        (label
+            :text {ontime ?
+                formattime(EWW_TIME, "%I:%M %p") :
+                formattime(EWW_TIME, "%Y-%m-%d")})))
+
 
 
 (deflisten workspaces "hyprland-workspaces _")
@@ -47,10 +75,37 @@
                 "${i.name}"))))
 
 
-(defwindow sillybar
-    :monitor 1
-    :geometry (geometry :x "20px"
-        :y "20px"
-        :anchor "top right")
-    :stacking "overlay"
-    (workspaceWidget["HDMI-A-1"]))
+
+(defwindow bar [monitor]
+    :monitor monitor
+    :geometry (geometry :x "0px"
+        :y "0px"
+        :width "100%"
+        :anchor "top center")
+    :stacking "fg"
+    :focusable false
+    :exclusive true
+
+    (centerbox :orientation "horizontal"
+        (box :orientation "h"
+            :halign "start"
+            :class "musicbox"
+            (musicWidget :class "music"))    
+        (workspaceWidget :monitor monitor
+            :hexpand true
+            :halign "center")
+        (box :orientation "horizontal"
+            :halign "end"
+            :class "sidestuffs"
+            "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
+            (netWidget)
+            (box :orientation "h"
+                :halign "end"
+                (timeWidget)
+                (systray :orientation "horizontal"
+                    :space-evenly false
+                    ; :icon-size 20
+                    :prepend-new true
+                    :hexpand true
+                    )))))
+
