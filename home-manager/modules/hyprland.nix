@@ -75,6 +75,8 @@ exec-once = [
   "bash ~/nix/home-manager/scripts/start.sh"
   "hyprctl setcursor Bibata-Modern-Classic 24"
   "hyprctl dispatch workspace 1"
+  "mpv --no-video ~/nix/home-manager/files/PremonitionStartupSound.mp3" 
+  "~/nix/home-manager/eww/scripts/music_too_long.sh"
 ];
 # exec-once = $terminal
 # exec-once = nm-applet &
@@ -258,6 +260,7 @@ bind = [
   "$mainMod, F, exec, $fileManager"
   "$mainMod, V, togglefloating,"
   "$mainMod, R, exec, $menu"
+  "$mainMod, T, exec, killall wlogout; wlogout"
   # "$mainMod, P, pseudo," # dwindle"
   "$mainMod, PRINT, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
   " , PRINT, exec, hyprshot -m output -o ~/Pictures/Screenshots"
@@ -331,6 +334,7 @@ bindel = [
   ", XF86AudioPause, exec, playerctl play-pause"
   ", XF86AudioPlay, exec, playerctl play-pause"
   ", XF86AudioPrev, exec, playerctl previous"
+  ", XF86AudioStop, exec, playerctl stop"
 ];
 
 # bindl = [

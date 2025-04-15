@@ -60,6 +60,16 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "rootofinfinity";
+      };
+    };
+  };
+
   # virtualisation.docker.enable = true;
 
   # Virtual Machine manager
@@ -279,6 +289,9 @@
     exiftool
     onlyoffice-desktopeditors
     mangohud
+    vlc
+    mpv
+    arduino-ide
     
     gcc
     btop

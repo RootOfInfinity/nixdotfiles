@@ -49,8 +49,8 @@
         (label :text
             {muted == "true" ? "${volume} "
                 : "${volume} 󰕾"})))
-
-
+; 
+; {strlength(music) > 40 ? " Name too long bro " : " ${music} "}
 
 (defvar ontime true)
 
