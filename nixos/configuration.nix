@@ -40,6 +40,26 @@
     };
   };
   
+  # UDEV Rules for Micronucleus boards including the Digispark.
+  # This file must be placed at:
+  #
+  # /etc/udev/rules.d/49-micronucleus.rules    (preferred location)
+  #   or
+  # /lib/udev/rules.d/49-micronucleus.rules    (req'd on some broken systems)
+  #
+  # To install, type these commands in a terminal:
+  #   sudo cp 49-micronucleus.rules /etc/udev/rules.d/49-micronucleus.rules
+  #   sudo udevadm control --reload-rules
+  #
+  # After this file is copied, physically unplug and reconnect the board.
+  services.udev.extraRules = ''
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", OWNER:="rootofinfinity"
+    KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", OWNER:="rootofinfinity", ENV{ID_MM_DEVICE_IGNORE}="1"
+  '';
+  # If you share your linux system with other users, or just don't like the
+  # idea of write permission for everybody, you can replace MODE:="0666" with
+  # OWNER:="yourusername" to create the device owned by you, or with
+  # GROUP:="somegroupname" and mange access using standard unix groups.
 
   # stylix = {
   #   enable = true;
@@ -60,15 +80,17 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "rootofinfinity";
-      };
-    };
-  };
+  # I'll be honest, the TUI didn't really work
+  # I like pure CLI login better.
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "rootofinfinity";
+  #     };
+  #   };
+  # };
 
   # virtualisation.docker.enable = true;
 
@@ -291,7 +313,17 @@
     mangohud
     vlc
     mpv
-    arduino-ide
+
+    libllvm # intended feature: use nix-shell when compiling
+    llvm-manpages
+
+    pkgs-unstable.arduino-ide
+    pkgs-unstable.arduino-core
+    appimage-run
+    micronucleus
+    libusb1
+    libusb-compat-0_1
+    pkgs-unstable.libnss_nis
     
     gcc
     btop

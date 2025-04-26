@@ -8,7 +8,7 @@ do
   sleep 5
   musicstr="$(eww get music)"
   musicsize="${#musicstr}"
-  if [ "$musicsize" -gt "40" ]; then
+  if [ "$musicsize" -gt "25" ]; then
     eww update music='!Too Long Name!'
   fi
 done
