@@ -82,7 +82,7 @@
         :y "0px"
         :width "100%"
         :anchor "top center")
-    :stacking "fg"
+    :stacking "bg"
     :focusable false
     :exclusive true
 

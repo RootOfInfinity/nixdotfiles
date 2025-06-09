@@ -6,13 +6,16 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      ./stylixconfig.nix
-    ];
+  [ # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+    ./stylixconfig.nix
+  ];
   # hardware.opengl = {
   #   package = pkgs-unstable.mesa.drivers;
   # };
+  hardware.uinput.enable = true;
+  users.groups.uinput.members = [ "rootofinfinity" ];
+  users.groups.input.members = [ "rootofinfinity" ];
 
   # Allow unfree software
   nixpkgs.config.allowUnfree = true;
@@ -257,8 +260,34 @@
   fonts.packages = with pkgs-unstable; [
     nerd-fonts.bigblue-terminal
   ];
+  # nixpkgs.overlays = [
+  #   (
+  #     final: prev: {
+  #       desmume = prev.desmume.overrideAttrs {
+  #         version = "0.9.11";
+  #         src = pkgs.fetchzip {
+  #           url = "https://sourceforge.net/projects/desmume/files/desmume/0.9.11/desmume-0.9.11.tar.gz/download";
+  #           hash = "";
+  #         };
+  #       };
+  #     }
+  #   )
+  # ];
+  # nixpkgs.overlays = [
+  #   (
+  #     final: prev: {
+  #       desmume = prev.desmume.overrideAttrs {
+  #         version = "0.9.11";
+  #       };
+  #     }
+  #   )
+  # ];
+  # desmume = pkgs.desmume.overrideAttrs (finalAttrs: previousAttrs: {
+  #   previousAttrs.version = "0.9.11";
+  # });
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    git-lfs
     helix
     wget
     firefox
@@ -283,6 +312,7 @@
     image-roll
     killall
     vscode-langservers-extracted
+    jdt-language-server
     pwvucontrol
     wlogout
     cava
@@ -299,7 +329,6 @@
     steamcmd
     obs-studio
     xfce.thunar
-    ranger
     usbutils
     udiskie
     udisks
@@ -310,9 +339,11 @@
     binwalk
     exiftool
     onlyoffice-desktopeditors
+    libreoffice-qt6-fresh
     mangohud
     vlc
     mpv
+    melonDS
 
     libllvm # intended feature: use nix-shell when compiling
     llvm-manpages
@@ -347,6 +378,8 @@
     lldb_19
     eww
     # stubby
+    yazi
+    ueberzugpp
     
 
     #for hyprland

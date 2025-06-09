@@ -59,7 +59,7 @@ workspace = [
 
 # Set programs that you use
 "$terminal" = "alacritty";
-"$fileManager" = "alacritty -e ranger";
+"$fileManager" = "alacritty -e yazi";
 "$guiFileManager" = "thunar";
 "$menu" = "rofi -show drun -show-icons";
 

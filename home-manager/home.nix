@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, pkgs-old, hyprland, hyprsplit, ... }: {
+{ config, pkgs, pkgs-unstable, pkgs-old, hyprland, hyprsplit, xremap, ... }: {
   home = {
     username = "rootofinfinity";
     homeDirectory = "/home/rootofinfinity";
@@ -17,6 +17,7 @@
   
   imports = [
     ./modules/bundle.nix
+    xremap.homeManagerModules.default
   ];
   programs.librewolf = {
     enable = true;

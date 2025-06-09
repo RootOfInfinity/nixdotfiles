@@ -25,12 +25,32 @@
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-23.11";
 
     stylix.url = "github:danth/stylix/release-24.11";
+
+    xremap.url = "github:xremap/nix-flake";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, ... }@inputs: 
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, ... }@inputs: 
     let
       system = "x86_64-linux";
     in {
+
+    # nixpkgs = import nixpkgs {
+    #   inherit system;
+    #   overrides = [
+    #     (
+    #       final: prev: {
+    #         desmume = prev.desmume.overrideAttrs {
+    #           version = "0.9.11";
+    #           src = nixpkgs.fetchzip {
+    #             url = "https://sourceforge.net/projects/desmume/files/desmume/0.9.11/desmume-0.9.11.tar.gz/download";
+    #             hash = "";
+    #           };
+    #         };
+    #       }
+    #     )
+    #   ];
+    # };
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
@@ -48,6 +68,7 @@
 
     homeConfigurations.rootofinfinity = home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
+        inherit xremap;
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;

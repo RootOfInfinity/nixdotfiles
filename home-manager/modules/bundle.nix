@@ -12,5 +12,7 @@
     ./cmus.nix
     ./eww.nix
     ./stylix.nix
+    ./yazi.nix
+    ./xremap.nix
   ];
 }
