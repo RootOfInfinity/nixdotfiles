@@ -26,7 +26,6 @@
     };
   };
 
-  programs.btop.enable = true;
 
 
   # stylix.enable = true;
