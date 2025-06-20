@@ -13,7 +13,6 @@
     ./eww.nix
     ./stylix.nix
     ./yazi.nix
-    ./xremap.nix
     ./btop.nix
   ];
 }

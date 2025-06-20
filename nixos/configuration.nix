@@ -2,20 +2,22 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, pkgs-unstable, inputs, hyprland, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, hyprland, xremap, ... }:
 
 {
   imports =
   [ # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
     ./stylixconfig.nix
+    # xremap.nixosModules.default
+    # ./xremap.nix
   ];
   # hardware.opengl = {
   #   package = pkgs-unstable.mesa.drivers;
   # };
-  hardware.uinput.enable = true;
-  users.groups.uinput.members = [ "rootofinfinity" ];
-  users.groups.input.members = [ "rootofinfinity" ];
+  # hardware.uinput.enable = true;
+  # users.groups.uinput.members = [ "rootofinfinity" ];
+  # users.groups.input.members = [ "rootofinfinity" ];
 
   # Allow unfree software
   nixpkgs.config.allowUnfree = true;
@@ -297,7 +299,9 @@
     discordo
     easyeffects
     htop
-    alacritty
+    element-desktop
+    ferium
+    
     neofetch
     home-manager
     nil

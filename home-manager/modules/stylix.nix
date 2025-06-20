@@ -35,5 +35,6 @@
     opacity.applications = 0.9;
 
     targets.helix.enable = false;
+    # targets.librewolf.profileNames = [ "rootofinfinityLIBREWOLF" ];
   };
 }

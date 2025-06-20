@@ -4,10 +4,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    homepkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "homepkgs";
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
@@ -22,14 +23,14 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixpkgs-old.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.11";
 
     stylix.url = "github:danth/stylix/release-24.11";
 
     xremap.url = "github:xremap/nix-flake";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, ... }@inputs: 
+  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, homepkgs, ... }@inputs: 
     let
       system = "x86_64-linux";
     in {
@@ -59,6 +60,7 @@
           config.allowUnfree = true;
         };
         inherit hyprland;
+        # inherit xremap;
       };
       modules = [
         ./nixos/configuration.nix
@@ -68,7 +70,6 @@
 
     homeConfigurations.rootofinfinity = home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
-        inherit xremap;
         pkgs-unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
@@ -80,7 +81,7 @@
         inherit hyprland;
         inherit hyprsplit;
       };
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = homepkgs.legacyPackages.${system};
       modules = [
         ./home-manager/home.nix
         stylix.homeManagerModules.stylix
