@@ -34,7 +34,7 @@
     let
       # system = "x86_64-linux";
       mkSystem = pkgs: system: hostname:
-        pkgs.lib.nixossystem {
+        pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
