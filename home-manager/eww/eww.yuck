@@ -28,8 +28,6 @@
     (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
         :class "connect_text"))
 
-
-
 (deflisten music :interval "5s"
     :initial ''
     `playerctl --follow metadata --format '{{ title }}' || true`)
@@ -49,6 +47,9 @@
         (label :text
             {muted == "true" ? "${volume} "
                 : "${volume} 󰕾"})))
+
+(defwidget batteryWidget []
+    (label :text "${EWW_BATTERY.capacity}%"))
 ; 
 ; {strlength(music) > 40 ? " Name too long bro " : " ${music} "}
 
@@ -99,6 +100,7 @@
             :class "sidestuffs"
             "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
             (netWidget)
+            (batteryWidget)
             (box :orientation "h"
                 :halign "end"
                 (timeWidget)

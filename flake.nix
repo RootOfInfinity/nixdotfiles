@@ -45,7 +45,7 @@
             # inherit xremap;
           };
           modules = [
-            ./nixos/configuration.nix
+            ./hosts/${hostname}/user.nix
             stylix.nixosModules.stylix
           ];
           

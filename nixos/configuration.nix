@@ -2,24 +2,15 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, pkgs-unstable, inputs, hyprland, xremap, ... }:
+{ config, lib, pkgs, pkgs-unstable, hyprland, ... }:
 
 {
-  imports =
-  [ # Include the results of the hardware scan.
+  imports = [ 
     /etc/nixos/hardware-configuration.nix
     ./stylixconfig.nix
-    # xremap.nixosModules.default
-    # ./xremap.nix
   ];
-  # hardware.opengl = {
-  #   package = pkgs-unstable.mesa.drivers;
-  # };
-  # hardware.uinput.enable = true;
-  # users.groups.uinput.members = [ "rootofinfinity" ];
-  # users.groups.input.members = [ "rootofinfinity" ];
 
-  # Allow unfree software
+  # -- NIXOS SETTINGS -- #
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -37,6 +28,8 @@
 
   nix.settings.auto-optimise-store = true;
 
+  # -- HARDWARE SETTINGS -- #  
+  hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   # hardware.bluetooth.powerOnBoot = true;
   hardware.bluetooth.settings = {
@@ -44,7 +37,8 @@
       Experimental = true;
     };
   };
-  
+
+  # -- DIGISPARK CONFIG -- #
   # UDEV Rules for Micronucleus boards including the Digispark.
   # This file must be placed at:
   #
@@ -61,57 +55,39 @@
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", OWNER:="rootofinfinity"
     KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", OWNER:="rootofinfinity", ENV{ID_MM_DEVICE_IGNORE}="1"
   '';
-  # If you share your linux system with other users, or just don't like the
-  # idea of write permission for everybody, you can replace MODE:="0666" with
-  # OWNER:="yourusername" to create the device owned by you, or with
-  # GROUP:="somegroupname" and mange access using standard unix groups.
 
-  # stylix = {
-  #   enable = true;
-  #   image = ../home-manager/files/cross-wallpaper.jpg;
-  #   polarity = "dark";
-  # };
-  
+    
   qt.enable = true;
   services.flatpak.enable = true;
 
+  # -- STEAM SETTINGS -- #
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
   # If ya wanna use mangohud, gamescope, or gamemode, put it in the
   # launch options like `mangohud %command%`
 
+  # -- FLASHDRIVE SETTINGS -- #
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  # I'll be honest, the TUI didn't really work
-  # I like pure CLI login better.
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #       user = "rootofinfinity";
-  #     };
-  #   };
-  # };
 
-  # virtualisation.docker.enable = true;
-
-  # Virtual Machine manager
+  # -- VIRTUAL MACHINE MANAGER -- #
   programs.virt-manager.enable = true;
   users.groups.libvirtd.members = [ "rootofinfinity" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-
   virtualisation.waydroid.enable = true;
   
 
+  # -- BOOT LOADER SETTINGS -- #
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
+  # -- NETWORKING SETTINGS -- #
   networking.hostName = "framework-13"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -121,57 +97,7 @@
   #   address = "fe80::1";
   #   interface = "enp2s0";
   # };
-
-  # networking = {
-  #   nameservers = [ "127.0.0.1" "::1" ];
-  #   networkmanager.dns = "none";
-  # };
-
-  # services.dnscrypt-proxy2 = {
-  #   enable = true;
-  #   settings = {
-  #     ipv6_servers = true;
-  #     require_dnssec = true;
-  #     query_log.file = "/var/log/dnscrypt-proxy/query.log"; # tests if it works
-  #     sources.public-resolvers = {
-  #       urls = [
-  #         "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-  #         "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"        
-  #       ];
-  #       cache_file = "/var/cache/dnscrypt-proxy/public-resolvers.md";
-  #       minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";      
-  #     };
-  #   server_names = [ "sdns://AgMAAAAAAAAABzEuMS4xLjIABzEuMS4xLjIKL2Rucy1xdWVyeQ" "sdns://AgMAAAAAAAAABzEuMC4wLjIABzEuMC4wLjIKL2Rucy1xdWVyeQ" ];
-  #   };
-  # };
-
-
-  # services.stubby = {
-  #   enable = true;
-  #   settings = pkgs.stubby.passthru.settingsExample // {
-  #     upstream_recursive_servers = [{
-  #       address_data = "1.1.1.1";
-  #       tls_auth_name = "cloudflare-dns.com";
-  #       tls_pubkey_pinset = [{
-  #         digest = "sha256";
-  #         value = "SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=";
-  #       }];
-  #     } {
-  #       address_data = "1.0.0.1";
-  #       tls_auth_name = "cloudflare-dns.com";
-  #       tls_pubkey_pinset = [{
-  #         digest = "sha256";
-  #         value = "SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=";
-  #       }];
-  #     }];
-  #   };
-  # };
-  
-  # SPfg6FluPIlUc6a5h313BDCxQYNGX+THTy7ig5X3+VA=
-
-
   networking.enableIPv6 = true;
-
   # networking.extraHosts = ''
   #   54.236.113.205 registry-1.docker.io
   #   54.198.86.24 registry-1.docker.io
@@ -184,6 +110,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+
+
+
+
+
+
+  # -- I DONT KNOW LOL -- #
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
@@ -192,9 +125,9 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  # -- IF I EVER SWITCH TO X11 -- #
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
   # services = {
   #   displayManager.defaultSession = "xfce";
   #   xserver = {
@@ -205,7 +138,7 @@
   #   };
   # };
 
-  # for hyprland
+  # -- HYPRLAND -- #
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -214,9 +147,9 @@
     # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   
-  hardware.graphics.enable = true;
   
 
+  # -- SOUND SETTINGS -- #
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -226,6 +159,7 @@
     jack.enable = true;
   };
 
+  # -- XDG PORTAL -- #
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -235,17 +169,12 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  # -- PRINTING -- #
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  # hardware.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
 
+  # -- KEPT JUST CAUSE -- #
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
@@ -255,82 +184,45 @@
     extraGroups = [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
-  # programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   fonts.packages = with pkgs-unstable; [
     nerd-fonts.bigblue-terminal
   ];
-  # nixpkgs.overlays = [
-  #   (
-  #     final: prev: {
-  #       desmume = prev.desmume.overrideAttrs {
-  #         version = "0.9.11";
-  #         src = pkgs.fetchzip {
-  #           url = "https://sourceforge.net/projects/desmume/files/desmume/0.9.11/desmume-0.9.11.tar.gz/download";
-  #           hash = "";
-  #         };
-  #       };
-  #     }
-  #   )
-  # ];
-  # nixpkgs.overlays = [
-  #   (
-  #     final: prev: {
-  #       desmume = prev.desmume.overrideAttrs {
-  #         version = "0.9.11";
-  #       };
-  #     }
-  #   )
-  # ];
-  # desmume = pkgs.desmume.overrideAttrs (finalAttrs: previousAttrs: {
-  #   previousAttrs.version = "0.9.11";
-  # });
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git-lfs
+    vim 
     helix
     wget
-    firefox
     librewolf
     tor-browser
     discord
-    discordo
     easyeffects
     htop
     element-desktop
-    ferium
     
-    neofetch
+    fastfetch
     home-manager
     nil
     dust
     bat
     zellij
-    mprocs
     ripgrep
     irust
     bacon
     p7zip
-    image-roll
     killall
     vscode-langservers-extracted
     jdt-language-server
-    pwvucontrol
     wlogout
     cava
     pipes-rs
     cmus
     jq
-    grim
-    slurp
     wl-clipboard
     hyprshot
     hyprpicker
-    inetutils
-    steam-tui
-    steamcmd
+    inetutils # check that
     obs-studio
     xfce.thunar
     usbutils
@@ -342,23 +234,13 @@
     pwntools
     binwalk
     exiftool
-    onlyoffice-desktopeditors
     libreoffice-qt6-fresh
     mangohud
     vlc
     mpv
     melonDS
 
-    libllvm # intended feature: use nix-shell when compiling
-    llvm-manpages
 
-    pkgs-unstable.arduino-ide
-    pkgs-unstable.arduino-core
-    appimage-run
-    micronucleus
-    libusb1
-    libusb-compat-0_1
-    pkgs-unstable.libnss_nis
     
     gcc
     btop
@@ -381,20 +263,17 @@
     markdown-oxide
     lldb_19
     eww
-    # stubby
     yazi
     ueberzugpp
     
 
     #for hyprland
-    waybar
     mako
     libnotify
     swww
     rofi-wayland
     playerctl
     hyprland-workspaces
-    # networkmanagerapplet
 
     # docker stuff
     # docker_26
@@ -406,6 +285,7 @@
 
   ];
 
+  # -- DONT REALLY KNOW FR -- #
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -414,6 +294,7 @@
   #   enableSSHSupport = true;
   # };
 
+  # -- SERVICES -- #
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -425,6 +306,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  # -- RANDOM STUFF - #
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
@@ -447,7 +329,7 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
 
