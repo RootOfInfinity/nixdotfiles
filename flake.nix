@@ -32,60 +32,55 @@
 
   outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, homepkgs, ... }@inputs: 
     let
-      system = "x86_64-linux";
+      # system = "x86_64-linux";
+      mkSystem = pkgs: system: hostname:
+        pkgs.lib.nixossystem {
+          inherit system;
+          specialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+            inherit hyprland;
+            # inherit xremap;
+          };
+          modules = [
+            ./nixos/configuration.nix
+            stylix.nixosModules.stylix
+          ];
+          
+        };
+      mkHome = pkgs: system: username:
+        home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = {
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+            pkgs-old = import nixpkgs-old {
+              inherit system;
+              config.allowUnfree = true;
+            };
+            inherit hyprland;
+            inherit hyprsplit;
+          };
+          pkgs = pkgs.legacyPackages.${system};
+          modules = [
+            {
+              home.username = username;
+              home.homeDirectory = "/home/${username}";
+            }
+            ./home-manager/home.nix
+            stylix.homeManagerModules.stylix
+          ];
+        };
     in {
 
-    # nixpkgs = import nixpkgs {
-    #   inherit system;
-    #   overrides = [
-    #     (
-    #       final: prev: {
-    #         desmume = prev.desmume.overrideAttrs {
-    #           version = "0.9.11";
-    #           src = nixpkgs.fetchzip {
-    #             url = "https://sourceforge.net/projects/desmume/files/desmume/0.9.11/desmume-0.9.11.tar.gz/download";
-    #             hash = "";
-    #           };
-    #         };
-    #       }
-    #     )
-    #   ];
-    # };
 
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        inherit hyprland;
-        # inherit xremap;
-      };
-      modules = [
-        ./nixos/configuration.nix
-        stylix.nixosModules.stylix
-      ];
+    nixosConfigurations = {
+      framework-13 = mkSystem nixpkgs "x86_64-linux" "framework-13";
+      nixos = mkSystem nixpkgs "x86_64-linux" "nixos";
     };
-
-    homeConfigurations.rootofinfinity = home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = {
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        pkgs-old = import nixpkgs-old {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        inherit hyprland;
-        inherit hyprsplit;
-      };
-      pkgs = homepkgs.legacyPackages.${system};
-      modules = [
-        ./home-manager/home.nix
-        stylix.homeManagerModules.stylix
-      ];
-    };
+    homeConfigurations.rootofinfinity = mkHome nixpkgs "x86_64-linux" "rootofinfinity";
   };
 }

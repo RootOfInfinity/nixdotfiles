@@ -1,7 +1,7 @@
 { config, pkgs, pkgs-unstable, pkgs-old, hyprland, hyprsplit,  ... }: {
   home = {
-    username = "rootofinfinity";
-    homeDirectory = "/home/rootofinfinity";
+    # username = "rootofinfinity";
+    # homeDirectory = "/home/rootofinfinity";
     stateVersion = "24.11";
 
     packages = [
