@@ -49,7 +49,7 @@
                 : "${volume} 󰕾"})))
 
 (defwidget batteryWidget []
-    (label :text "${EWW_BATTERY.capacity}%"))
+    (label :text "${EWW_BATTERY.BAT1.capacity}%"))
 ; 
 ; {strlength(music) > 40 ? " Name too long bro " : " ${music} "}
 
@@ -77,30 +77,46 @@
 
 
 
-(defwindow bar [monitor]
+(defwindow bar [monitor type]
     :monitor monitor
-    :geometry (geometry :x "0px"
-        :y "0px"
-        :width "100%"
-        :anchor "top center")
+    :hexpand false
+    :vexpand false
+    :geometry (geometry
+        :anchor "top center"
+        :x 0 :y 0
+        :width "100%")
+    :reserve (struts
+        :distance "50px" :side "top")
     :stacking "bg"
     :focusable false
     :exclusive true
-
-    (centerbox :orientation "horizontal"
-        (box :orientation "h"
-            :halign "start"
+    (bar :type "laptop" :monitor monitor))
+(defwidget bar [type monitor]
+    ; :monitor monitor
+    ; :geometry (geometry :x "0px"
+    ;     :y "0px"
+    ;     :width "100%"
+    ;     :anchor "top center")
+    ; :stacking "bg"
+    ; :focusable false
+    ; :exclusive true
+    (box :orientation "h"
+        :space-evenly false
+        :class "bar"
+        (box :halign "start"
             :class "musicbox"
-            (musicWidget :class "music"))    
-        (workspaceWidget :monitor monitor
-            :hexpand true
-            :halign "center")
-        (box :orientation "horizontal"
-            :halign "end"
+            :space-evenly false
+            :spacing -12
+            (musicWidget :class "music")    
+            (workspaceWidget :monitor monitor))
+        (box :halign "end"
             :class "sidestuffs"
+            :spacing 12
+            :hexpand true
+            :space-evenly false
             "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
             (netWidget)
-            (batteryWidget)
+            (label :text {type == "laptop" ? "${EWW_BATTERY.BAT1.capacity}% " : ""})
             (box :orientation "h"
                 :halign "end"
                 (timeWidget)

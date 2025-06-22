@@ -19,12 +19,12 @@
     ./modules/bundle.nix
     # xremap.homeManagerModules.default
   ];
-  programs.librewolf = {
-    enable = true;
-    settings = {
-      "webgl.disabled" = false;
-    };
-  };
+  # programs.librewolf = {
+  #   enable = true;
+  #   settings = {
+  #     "webgl.disabled" = false;
+  #   };
+  # };
   services.mako.enable = true;
 
 

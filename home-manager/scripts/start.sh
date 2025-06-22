@@ -9,8 +9,8 @@ swww img ~/nix/home-manager/files/CrossGruvbox.png &
 mako &
 # new bar
 eww daemon &
-eww open bar --id primary --arg monitor=1 &
-eww open bar --id secondary --arg monitor=0
+eww open bar --id primary --arg monitor=1 --arg type=laptop &
+eww open bar --id secondary --arg monitor=0 --arg type=laptop
 
 #for managing network | not anymore
 # nm-applet --indicator &

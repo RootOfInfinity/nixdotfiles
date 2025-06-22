@@ -88,7 +88,7 @@
 
 
   # -- NETWORKING SETTINGS -- #
-  networking.hostName = "framework-13"; # Define your hostname.
+  # networking.hostName = "Declared in user.nix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -189,100 +189,6 @@
   # $ nix search wget
   fonts.packages = with pkgs-unstable; [
     nerd-fonts.bigblue-terminal
-  ];
-  environment.systemPackages = with pkgs; [
-    vim 
-    helix
-    wget
-    librewolf
-    tor-browser
-    discord
-    easyeffects
-    htop
-    element-desktop
-    
-    fastfetch
-    home-manager
-    nil
-    dust
-    bat
-    zellij
-    ripgrep
-    irust
-    bacon
-    p7zip
-    killall
-    vscode-langservers-extracted
-    jdt-language-server
-    wlogout
-    cava
-    pipes-rs
-    cmus
-    jq
-    wl-clipboard
-    hyprshot
-    hyprpicker
-    inetutils # check that
-    obs-studio
-    xfce.thunar
-    usbutils
-    udiskie
-    udisks
-    rustup
-    prismlauncher
-    python3
-    pwntools
-    binwalk
-    exiftool
-    libreoffice-qt6-fresh
-    mangohud
-    vlc
-    mpv
-    melonDS
-
-
-    
-    gcc
-    btop
-    feh
-    unzip
-    burpsuite
-    r2modman
-    steam-run-free
-    zulu23
-    ghidra
-    gdb
-    gef
-    crawl
-    pkg-config
-    bluetuith
-    pulsemixer
-    zathura
-    qemu_full
-    keepassxc
-    markdown-oxide
-    lldb_19
-    eww
-    yazi
-    ueberzugpp
-    
-
-    #for hyprland
-    mako
-    libnotify
-    swww
-    rofi-wayland
-    playerctl
-    hyprland-workspaces
-
-    # docker stuff
-    # docker_26
-    # dockerfile-language-server-nodejs
-    # docker-compose-language-service
-    # yaml-language-server
-    # mysql-workbench
-    
-
   ];
 
   # -- DONT REALLY KNOW FR -- #
