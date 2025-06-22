@@ -1,3 +1,14 @@
+$blue: #83a598;
+$green: #b8bb26;
+$aqua: #8ec07c;
+$red: #fb4934;
+$orange: #fe8019;
+$purple: #d3869b;
+$brown: #d65d0e;
+$light: #fbf1c7;
+$dark: #282828;
+$main: $blue;
+
 .musicbox {
   margin-left: 10px;
 }
@@ -18,4 +29,34 @@
 
 .bar {
   font-size: 9;
+  background-color: $main;
+  color: $dark;
+}
+
+.blk {
+  color: $dark;
+}
+
+.workspaces {
+  background-color: $dark;
+  border-radius: 7;
+}
+
+.wrkbtn {
+  background-color: $main;
+  color: $dark;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.timecontainer {
+  background-color: $dark;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 3;
+}
+
+.timebutton {
+  background-color: $main;
+  color: $dark;
 }

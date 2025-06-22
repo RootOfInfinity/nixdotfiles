@@ -18,62 +18,12 @@
 
 ; (defwidget powermenu_layout []
 ;     (label :text "Hello, Powermenu!"))
-
-(defpoll net :interval "50s"
-    :initial `N/A`
-    `nmcli -f DEVICE,TYPE,STATE device \
-         | awk '{if($3=="connected" && $1!="lo")print$1" "$2}'`)
-
-(defwidget netWidget []
-    (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
-        :class "connect_text"))
-
-(deflisten music :interval "5s"
-    :initial ''
-    `playerctl --follow metadata --format '{{ title }}' || true`)
-
-(defpoll volume :interval "1s"
-    :inital "N/A"
-    `awk -F"'" '/Default/ {print $2}' <(pulsemixer --list-sinks)`)
-
-(defpoll muted :interval "1s"
-    :inital false
-    `~/nix/home-manager/eww/scripts/getmuted.sh`) 
-
-(defwidget musicWidget []
-    (box :orientation "h"
-        :halign "start"
-        (label :text {music != '' ? " ${music} " : "󰝛 LOCKED IN 󰝛"} )
-        (label :text
-            {muted == "true" ? "${volume} "
-                : "${volume} 󰕾"})))
-
-(defwidget batteryWidget []
-    (label :text "${EWW_BATTERY.BAT1.capacity}%"))
-; 
-; {strlength(music) > 40 ? " Name too long bro " : " ${music} "}
-
-(defvar ontime true)
-
-(defwidget timeWidget []
-    (button
-        :onclick '~/nix/home-manager/eww/scripts/toggletimevar.sh'
-        (label
-            :text {ontime ?
-                formattime(EWW_TIME, "%I:%M %p") :
-                formattime(EWW_TIME, "%Y-%m-%d")})))
+(include "./vars.yuck")
+(include "./basicwidgets.yuck")
+(include "./bar.yuck")
+(include "./powermenu.yuck")
 
 
-
-(deflisten workspaces "hyprland-workspaces _")
-
-(defwidget workspaceWidget [monitor]
-    (box :class "workspaces"
-        (for i in {workspaces[monitor].workspaces}
-            (button
-                :onclick "hyprctl dispatch workspace ${i.id}"
-                :class "${i.class}"
-                "${i.name}"))))
 
 
 
@@ -91,39 +41,18 @@
     :focusable false
     :exclusive true
     (bar :type "laptop" :monitor monitor))
-(defwidget bar [type monitor]
-    ; :monitor monitor
-    ; :geometry (geometry :x "0px"
-    ;     :y "0px"
-    ;     :width "100%"
-    ;     :anchor "top center")
-    ; :stacking "bg"
-    ; :focusable false
-    ; :exclusive true
-    (box :orientation "h"
-        :space-evenly false
-        :class "bar"
-        (box :halign "start"
-            :class "musicbox"
-            :space-evenly false
-            :spacing -12
-            (musicWidget :class "music")    
-            (workspaceWidget :monitor monitor))
-        (box :halign "end"
-            :class "sidestuffs"
-            :spacing 12
-            :hexpand true
-            :space-evenly false
-            "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
-            (netWidget)
-            (label :text {type == "laptop" ? "${EWW_BATTERY.BAT1.capacity}% " : ""})
-            (box :orientation "h"
-                :halign "end"
-                (timeWidget)
-                (systray :orientation "horizontal"
-                    :space-evenly false
-                    ; :icon-size 20
-                    :prepend-new true
-                    :hexpand true
-                    )))))
+
+(defwindow powermenu []
+    :monitor 0
+    :hexpand false
+    :vexpand false
+    :geometry (geometry
+        :anchor "center"
+        :x "50%" :y "50%"
+        :width "50%"
+        :height "50%")
+    :stacking "fg"
+    :focusable false
+    :exclusive true
+    (powermenu))
 

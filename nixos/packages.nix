@@ -83,6 +83,8 @@
     rofi-wayland
     playerctl
     hyprland-workspaces
+    bc
+    brightnessctl
 
     # docker stuff
     # docker_26

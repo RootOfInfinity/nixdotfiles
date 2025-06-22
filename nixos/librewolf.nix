@@ -18,6 +18,7 @@
         "privacy.trackingprotection.socialtracking.enabled" = true;
         "webgl.disabled" = false;
         "webgl.disable-wgl" = false;
+        "layout.css.devPixelsPerPx" = 1.2;
       };
       ExtensionSettings = {
         # uBlock Origin:

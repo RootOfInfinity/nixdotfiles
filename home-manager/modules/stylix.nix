@@ -24,7 +24,7 @@
         name = "Noto Color Emoji";
       };
       sizes = {
-        applications = 6;
+        applications = 10;
         desktop = 6;
         terminal = 6;
         popups = 12;

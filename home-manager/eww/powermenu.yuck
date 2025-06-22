@@ -1,0 +1,3 @@
+(defwidget powermenu []
+    (box :class "powercontainer"
+        (label :text "hello power!")))

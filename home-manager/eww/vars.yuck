@@ -1,0 +1,29 @@
+
+(defpoll net :interval "50s"
+    :initial `N/A`
+    `nmcli -f DEVICE,TYPE,STATE device \
+         | awk '{if($3=="connected" && $1!="lo")print$1" "$2}'`)
+
+(defwidget netWidget []
+    (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
+        :class "connect_text"))
+
+(deflisten music :interval "5s"
+    :initial ''
+    `playerctl --follow metadata --format '{{ title }}' || true`)
+
+(defpoll volume :interval "1s"
+    :inital "N/A"
+    `awk -F"'" '/Default/ {print $2}' <(pulsemixer --list-sinks)`)
+
+(defpoll muted :interval "1s"
+    :inital false
+    "~/nix/home-manager/eww/scripts/getmuted.sh") 
+
+(defvar ontime true)
+
+(deflisten workspaces "hyprland-workspaces _")
+
+
+
+

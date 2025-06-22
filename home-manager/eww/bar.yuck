@@ -1,0 +1,30 @@
+
+(defwidget bar [type monitor]
+    (box :orientation "h"
+        :space-evenly false
+        :class "bar"
+        :hexpand false
+        (box :halign "start"
+            :hexpand false
+            :class "musicbox"
+            :space-evenly false
+            :spacing -12
+            (musicWidget :class "music")    
+            (workspaceWidget :monitor monitor))
+        (box :halign "end"
+            :class "sidestuffs"
+            :spacing 12
+            :hexpand true
+            :space-evenly false
+            "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
+            (netWidget)
+            (label :text {type == "laptop" ? "${EWW_BATTERY.BAT1.capacity}% " : ""})
+            (box :orientation "h"
+                :halign "end"
+                (timeWidget)
+                (systray :orientation "horizontal"
+                    :space-evenly false
+                    ; :icon-size 20
+                    :prepend-new true
+                    :hexpand true
+                    )))))

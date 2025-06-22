@@ -1,0 +1,35 @@
+
+(defwidget musicWidget []
+    (box :orientation "h"
+        :halign "start"
+        (label :text {music != '' ? " ${music} " : "󰝛 LOCKED IN 󰝛"}
+            :class "blk")
+        (label :text
+            {muted == "true" ? "${volume} "
+                : "${volume} 󰕾"}
+            :class "blk")))
+
+(defwidget batteryWidget []
+    (label :text "${EWW_BATTERY.BAT1.capacity}%"))
+; 
+; {strlength(music) > 40 ? " Name too long bro " : " ${music} "}
+
+
+(defwidget timeWidget []
+    (box :class "timecontainer"
+        (button
+            :onclick "./scripts/toggletimevar.sh"
+            :class "timebutton"
+            (label
+                :text {ontime ?
+                    formattime(EWW_TIME, "%I:%M %p") :
+                    formattime(EWW_TIME, "%Y-%m-%d")}))))
+
+
+(defwidget workspaceWidget [monitor]
+    (box :class "workspaces"
+        (for i in {workspaces[monitor].workspaces}
+            (button
+                :onclick "hyprctl dispatch workspace ${i.id}"
+                :class "wrkbtn"
+                "${i.name}"))))
