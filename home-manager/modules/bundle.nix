@@ -14,5 +14,6 @@
     ./stylix.nix
     ./yazi.nix
     ./btop.nix
+    ./dunst.nix
   ];
 }

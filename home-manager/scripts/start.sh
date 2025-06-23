@@ -6,7 +6,7 @@ swww-daemon &
 # set wallpaper
 swww img ~/nix/home-manager/files/CrossGruvbox.png &
 # for notifs
-mako &
+# dunst &
 # new bar
 eww daemon &
 eww open bar --id primary --arg monitor=1 --arg type=laptop &

@@ -1,3 +1,7 @@
 (defwidget powermenu []
     (box :class "powercontainer"
-        (label :text "hello power!")))
+        :orientation "v"
+        (box :class "technicals"
+            :orientation "h")
+        (box :class "time_date"
+            :orientation "h")))

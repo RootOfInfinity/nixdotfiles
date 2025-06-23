@@ -77,7 +77,7 @@
     
 
     #for hyprland
-    mako
+    dunst
     libnotify
     swww
     rofi-wayland
@@ -93,6 +93,7 @@
     # yaml-language-server
     # mysql-workbench
     
+    pkgs-unstable.tlp
 
   ];
   
