@@ -33,6 +33,7 @@
   outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, homepkgs, ... }@inputs: 
     let
       # system = "x86_64-linux";
+      linux = "x86_64-linux";
       mkSystem = pkgs: system: hostname:
         pkgs.lib.nixosSystem {
           inherit system;
@@ -50,7 +51,7 @@
           ];
           
         };
-      mkHome = pkgs: system: username:
+      mkHome = pkgs: system: username: host:
         home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
@@ -70,7 +71,7 @@
               home.username = username;
               home.homeDirectory = "/home/${username}";
             }
-            ./home-manager/home.nix
+            ./hosts/${host}/home.nix
             stylix.homeManagerModules.stylix
           ];
         };
@@ -78,9 +79,12 @@
 
 
     nixosConfigurations = {
-      framework-13 = mkSystem nixpkgs "x86_64-linux" "framework-13";
-      nixos = mkSystem nixpkgs "x86_64-linux" "nixos";
+      framework-13 = mkSystem nixpkgs linux "framework-13";
+      nixos = mkSystem nixpkgs linux "nixos";
     };
-    homeConfigurations.rootofinfinity = mkHome nixpkgs "x86_64-linux" "rootofinfinity";
+    homeConfigurations = {
+      "rootofinfinity@nixos" = mkHome nixpkgs linux "rootofinfinity" "nixos";
+      "rootofinfinity@framework-13" = mkHome nixpkgs linux "rootofinfinity" "framework-13";
+    };
   };
 }

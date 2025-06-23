@@ -1,10 +1,5 @@
-{ config, pkgs, pkgs-unstable, pkgs-old, hyprland, hyprsplit,  ... }: {
-  home = {
-    # username = "rootofinfinity";
-    # homeDirectory = "/home/rootofinfinity";
-    stateVersion = "24.11";
-
-    packages = [
+{ config, pkgs, pkgs-unstable,  ... }: {
+  home.packages = [
       pkgs.cmatrix
       pkgs.nsnake
       pkgs-unstable.flatpak
@@ -12,25 +7,7 @@
       pkgs.gnome-themes-extra
     ];
 
-  };
-
-  
-  imports = [
-    ./modules/bundle.nix
-    # xremap.homeManagerModules.default
-  ];
-  # programs.librewolf = {
-  #   enable = true;
-  #   settings = {
-  #     "webgl.disabled" = false;
-  #   };
-  # };
-  services.mako.enable = true;
-
-
-
-  # stylix.enable = true;
-
+  imports = [ ./modules/bundle.nix ];
   # Dont need this no more, since I got the stylix module
   dconf.settings = {
   #   "org/gnome/desktop/background" = {

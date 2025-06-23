@@ -93,7 +93,6 @@
     # yaml-language-server
     # mysql-workbench
     
-    pkgs-unstable.tlp
 
   ];
   

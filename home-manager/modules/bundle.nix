@@ -1,5 +1,6 @@
 { pkgs, pkgs-unstable, config, hyprsplit, ... }:
 {
+  # this is the shared behavior between systems.
   imports = [
     ./helix.nix
     ./git.nix
@@ -8,7 +9,6 @@
     ./alacritty.nix
     ./zoxide.nix
     ./hyprland.nix
-    ./waybar.nix
     ./cmus.nix
     ./eww.nix
     ./stylix.nix
