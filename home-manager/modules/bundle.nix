@@ -9,6 +9,7 @@
     ./alacritty.nix
     ./zoxide.nix
     ./hyprland.nix
+    ./hyprlock.nix
     ./cmus.nix
     ./eww.nix
     ./stylix.nix

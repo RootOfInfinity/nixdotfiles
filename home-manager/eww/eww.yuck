@@ -22,6 +22,7 @@
 (include "./basicwidgets.yuck")
 (include "./bar.yuck")
 (include "./powermenu.yuck")
+(include "./powerwidgets.yuck")
 
 
 

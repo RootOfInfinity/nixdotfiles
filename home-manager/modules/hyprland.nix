@@ -79,7 +79,8 @@ exec-once = [
   "hyprctl setcursor Bibata-Modern-Classic 24"
   "hyprctl dispatch workspace 1"
   "mpv --no-video ~/nix/home-manager/files/PremonitionStartupSound.mp3" 
-  "~/nix/home-manager/eww/scripts/music_too_long.sh"
+  "[workspace special:quick_term silent] alacritty --class 'floatcritty' -e nu -e fastfetch"
+  # "~/nix/home-manager/eww/scripts/music_too_long.sh"
 ];
 # exec-once = $terminal
 # exec-once = nm-applet &
@@ -260,17 +261,24 @@ bind = [
   "$mainMod, C, killactive,"
   "$mainMod, M, exit,"
   "$mainMod, E, exec, $guiFileManager"
-  "$mainMod, F, exec, $fileManager"
+  # "$mainMod, F, exec, $fileManager"
+  "$mainMod, F, fullscreen, 0"
   "$mainMod, V, togglefloating,"
   "$mainMod, R, exec, $menu"
   "$mainMod, T, exec, killall wlogout; wlogout"
+  "$mainMod, P, exec, hyprlock"
+  "$mainMod, D, exec, eww close powermenu; eww open powermenu"
+  "$mainMod, ESCAPE, exec, eww close powermenu"
+  "$mainMod, W, exec, hyprpicker | wl-copy"
+
+
   # "$mainMod, P, pseudo," # dwindle"
   "$mainMod, PRINT, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
   " , PRINT, exec, hyprshot -m output -o ~/Pictures/Screenshots"
   "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o ~/Pictures/Screenshots -z"
   "$mainMod, U, togglesplit, # dwindle"
   # "$mainMod, S, split:swapactiveworkspaces"
-  "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
+  # "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
   # Move focus with mainMod + hjkl
   "$mainMod, H, movefocus, l"
   "$mainMod, L, movefocus, r"
@@ -298,6 +306,11 @@ bind = [
   "$mainMod, 8, workspace, 8"
   "$mainMod, 9, workspace, 9"
   "$mainMod, 0, workspace, 10"
+  "$mainMod CTRL, 1, workspace, 11"
+  "$mainMod CTRL, 2, workspace, 12"
+  "$mainMod CTRL, 3, workspace, 13"
+  "$mainMod CTRL, 4, workspace, 14"
+  "$mainMod CTRL, 5, workspace, 15"
 
   # Move active window to a workspace with mainMod + SHIFT + [0-9]
   "$mainMod SHIFT, 1, movetoworkspace, 1"
@@ -310,9 +323,14 @@ bind = [
   "$mainMod SHIFT, 8, movetoworkspace, 8"
   "$mainMod SHIFT, 9, movetoworkspace, 9"
   "$mainMod SHIFT, 0, movetoworkspace, 10"
+  "$mainMod CTRL SHIFT, 1, movetoworkspace, 11"
+  "$mainMod CTRL SHIFT, 2, movetoworkspace, 12"
+  "$mainMod CTRL SHIFT, 3, movetoworkspace, 13"
+  "$mainMod CTRL SHIFT, 4, movetoworkspace, 14"
+  "$mainMod CTRL SHIFT, 5, movetoworkspace, 15"
   # Example special workspace (scratchpad)
-  # "$mainMod, S, togglespecialworkspace, magic"
-  # "$mainMod SHIFT, S, movetoworkspace, special:magic"
+  "$mainMod, S, togglespecialworkspace, quick_term"
+  "$mainMod SHIFT, S, movetoworkspace, special:quick_term"
   # Scroll through existing workspaces with mainMod + scroll
   "$mainMod, mouse_down, workspace, e+1"
   "$mainMod, mouse_up, workspace, e-1"
@@ -338,6 +356,9 @@ bindel = [
   ", XF86AudioPlay, exec, playerctl play-pause"
   ", XF86AudioPrev, exec, playerctl previous"
   ", XF86AudioStop, exec, playerctl stop"
+  # Laptop close
+  ", switch:on:Lid Switch, exec, hyprlock & hyprctl dispatch dpms off"
+  ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
 ];
 
 # bindl = [
@@ -361,6 +382,11 @@ bindel = [
 # Example windowrule v2
 # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
+windowrule = [
+  "float,class:^floatcritty$"
+  "size 800 600,class:^floatcritty$"
+  "move 100 100,class:^floatcritty$"
+];
 windowrulev2 = [
   # Ignore maximize requests from apps. You'll probably like this.
   "suppressevent maximize, class:.*"

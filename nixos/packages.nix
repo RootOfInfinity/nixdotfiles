@@ -85,6 +85,8 @@
     hyprland-workspaces
     bc
     brightnessctl
+    acpi
+    todo
 
     # docker stuff
     # docker_26

@@ -1,0 +1,25 @@
+; (defwidget pref_graphs []
+;     (box :class "graph_cont"
+;         :orientation "v"
+;         :valign "end"
+;         (combo-box-text :class "graph_choose"
+;             :items "[cpu, mem, temp]"
+;             :onchange "./scripts/switch_graph.sh {}")
+;             :valign "end"
+;         (stack :class "graphs"
+;             :selected {graph_choice}
+;             :same-size true
+;             :valign "end"
+;             (graph :class "cpu_graph"
+;                 :value {EWW_CPU.avg}
+;                 :time-range 3000
+;                 :dynamic true)
+;             (graph :class "mem_graph"
+;                 :value {EWW_RAM.used_mem_perc}
+;                 :time-range 3000
+;                 :dynamic true)
+;             (graph :class "temp_graph"
+;                 :value {temp}
+;                 :time-range 3000
+;                 :dynamic true))
+;             "awesome"))

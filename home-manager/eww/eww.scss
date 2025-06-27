@@ -60,3 +60,13 @@ $main: $blue;
   background-color: $main;
   color: $dark;
 }
+
+// powermenu
+
+.battery_bar>trough {
+  min-width: 30px;
+}
+
+.battery_bar>trough>progress {
+  min-width: 30px;
+}

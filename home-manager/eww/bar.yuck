@@ -8,23 +8,27 @@
             :hexpand false
             :class "musicbox"
             :space-evenly false
-            :spacing -12
+            :spacing 12
             (musicWidget :class "music")    
             (workspaceWidget :monitor monitor))
         (box :halign "end"
             :class "sidestuffs"
-            :spacing 12
+            :spacing 5
             :hexpand true
             :space-evenly false
             "${round(EWW_CPU.avg, 1)}%  ${round(EWW_RAM.used_mem_perc, 1)}% "
             (netWidget)
-            (label :text {type == "laptop" ? "${EWW_BATTERY.BAT1.capacity}% " : ""})
+            (label :text {type == "laptop" ? "${EWW_BATTERY.BAT1.capacity}% " : ""}
+                :style {EWW_BATTERY.BAT1.capacity < 10 ?
+                    "color: #fb4934" : ""})
             (box :orientation "h"
                 :halign "end"
+                :space-evenly false
                 (timeWidget)
-                (systray :orientation "horizontal"
+                (systray :orientation "v"
                     :space-evenly false
-                    ; :icon-size 20
-                    :prepend-new true
-                    :hexpand true
-                    )))))
+                    :halign "end"
+                    :spacing 0
+                    :icon-size 1
+                    :visible false)))))
+

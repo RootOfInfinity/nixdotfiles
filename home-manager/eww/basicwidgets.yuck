@@ -2,8 +2,12 @@
 (defwidget musicWidget []
     (box :orientation "h"
         :halign "start"
+        :hexpand true
+        :space-evenly false
+        :spacing 12
         (label :text {music != '' ? " ${music} " : "󰝛 LOCKED IN 󰝛"}
-            :class "blk")
+            :class "blk"
+            :limit-width 28)
         (label :text
             {muted == "true" ? "${volume} "
                 : "${volume} 󰕾"}
@@ -32,4 +36,8 @@
             (button
                 :onclick "hyprctl dispatch workspace ${i.id}"
                 :class "wrkbtn"
-                "${i.name}"))))
+                (label :text {i.id > 0 ? "${i.name}" : "s"})))))
+
+(defwidget netWidget []
+    (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
+        :class "connect_text"))

@@ -26,6 +26,7 @@
       editor = {
         line-number = "relative";
         lsp.display-messages = true;
+        mouse = false;
       };
       keys.normal = {
         esc = [ "keep_primary_selection" "collapse_selection" ];

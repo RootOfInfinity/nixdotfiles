@@ -34,6 +34,10 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4330901/gesturefy-3.2.13.xpi";
           installation_mode = "force_installed";
         };
+        "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4497925/user_agent_string_switcher-0.6.5.1.xpi";
+          installation_mode = "force_installed";
+        };
       };
     };
   };

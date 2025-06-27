@@ -4,10 +4,6 @@
     `nmcli -f DEVICE,TYPE,STATE device \
          | awk '{if($3=="connected" && $1!="lo")print$1" "$2}'`)
 
-(defwidget netWidget []
-    (label :text {net == "" ? '󱘖 Disconnected 󱘖' : ' ${net} '}
-        :class "connect_text"))
-
 (deflisten music :interval "5s"
     :initial ''
     `playerctl --follow metadata --format '{{ title }}' || true`)
@@ -22,7 +18,26 @@
 
 (defvar ontime true)
 
+(defvar graph_choice 0)
+
 (deflisten workspaces "hyprland-workspaces _")
+
+(defpoll battery_time :interval "5s"
+    :initial ''
+    `acpi | awk -F ", " '{print $3}'`)
+
+(defpoll temp :interval "10s"
+    :initial '10'
+    "acpi -tf | awk -F ' ' '{sum+=$4; total+=1} END {print sum/total}'")
+
+(defpoll todoleft :interval "10s"
+    :initial ''
+    'todo raw todo')
+
+(defpoll tododone :interval "10s"
+    :initial ''
+    'todo raw done')
+
 
 
 

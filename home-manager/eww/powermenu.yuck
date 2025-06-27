@@ -2,6 +2,65 @@
     (box :class "powercontainer"
         :orientation "v"
         (box :class "technicals"
-            :orientation "h")
+            :orientation "h"
+            (box :class "preformance"
+                :orientation "v"
+                (box :class "cpu_box"
+                    :orientation "h"
+                    :valign "center"
+                    (progress :class "cpu_bar"
+                        :value {round(EWW_CPU.avg, 1)})
+                    (label :text "${round(EWW_CPU.avg, 1)}% "))
+                (box :class "mem_box"
+                    :orientation "h"
+                    :valign "center"
+                    (progress :class "mem_bar"
+                        :value {round(EWW_RAM.used_mem_perc, 1)})
+                    (label :text "${round(EWW_RAM.used_mem_perc, 1)}% "))
+                (box :class "temp_box"
+                    :orientation "h"
+                    (label :text "${temp}F")
+                    (label :text {temp > 320 ? "HOT" : "OK"}))
+                (systray :orientation "h"
+                    :icon-size 40
+                    :space-evenly false
+                    :valign "end"
+                    :spacing 10))
+            (box :class "battery"
+                :orientation "h"
+                :space-evenly false
+                :halign "end"
+                :spacing 10
+                (box :class "bat_info"
+                    :orientation "v"
+                    (label :text "--BATTERY-INFORMATION--")
+                    (label :text "${EWW_BATTERY.BAT1.capacity}% ${
+                        EWW_BATTERY.BAT1.status == "Charging" ? "" : ""}"
+                        :style {EWW_BATTERY.BAT1.status == "Charging" ?
+                            "color: #83a598" : "color: #d3869b"})
+                    (label :text {EWW_BATTERY.BAT1.capacity < 30 ?
+                        "BATTERY LOW" : "BATTERY GOOD"})
+                    (label :text  {battery_time}))
+                (progress :value {EWW_BATTERY.BAT1.capacity}
+                    :class "battery_bar"
+                    :flipped true
+                    :orientation "v"
+                    :height "100%"
+                    :css {EWW_BATTERY.BAT1.capacity < 20 ?
+                        ".battery_bar>trough>progress {background-color: #fb4934;}" :
+                        ".battery_bar>trough>progress {background-color: #b8bb26;}"})))
         (box :class "time_date"
-            :orientation "h")))
+            :orientation "h"
+            (calendar :day {formattime(EWW_TIME, "%d")}
+                :month {formattime(EWW_TIME, "%m")}
+                :year {formattime(EWW_TIME, "%Y")}
+                :show-day-names true
+                :width "50%")
+            (box :class "todo_box"
+                :orientation "v"
+                :space-evenly false
+                "--TODO--"
+                "Left:"
+                (label :text {todoleft})
+                "Done:"
+                (label :text {tododone})))))
