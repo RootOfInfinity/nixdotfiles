@@ -6,7 +6,6 @@
       upgrade = "sudo nixos-rebuild switch --flake ~/nix --impure --upgrade";
       homebuild = "home-manager switch --flake ~/nix";
       cd = "z";
-      pushit = "git push origin main; mpv '~/Music/chrono-trigger/Fanfarre 2.mp3'";
     };
     extraConfig = /*nu*/ ''
       $env.config.show_banner = false
