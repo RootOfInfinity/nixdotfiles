@@ -8,8 +8,8 @@ sleep 1;
 # for notifs
 # dunst &
 # new bar
-eww daemon &
-eww open bar --id primary --arg monitor=1 --arg type=laptop &
+eww daemon 
+eww open bar --id primary --arg monitor=1 --arg type=laptop 
 eww open bar --id secondary --arg monitor=0 --arg type=laptop
 
 #for managing network | not anymore
