@@ -1,9 +1,12 @@
-{ hyprland, hyprsplit, pkgs, ... }:
+{ hyprland, hyprsplit, pkgs, hypr-dyn-cursors, ... }:
 {
   wayland.windowManager.hyprland = {
     enable = true;
     # withUWSM = true;
     xwayland.enable = true;
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    systemd.enable = false;
 
 
     ###############
@@ -14,8 +17,11 @@
       # split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       # hyprsplit.packages.default
       # pkgs.hyprlandPlugins.hyprsplit
+      pkgs.hyprlandPlugins.hypr-dynamic-cursors
     ];
-
+    # extraConfig = ''
+    #     plugin = ${hypr-dyn-cursors.packages.${pkgs.system}.hypr-dynamic-cursors}/lib/libhypr-dynamic-cursors.so
+    # '';
     # package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
     settings = {
@@ -344,8 +350,8 @@ bindm = [
 
 bindel = [
   # Laptop multimedia keys for volume and LCD brightness
-  ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-  ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  ",XF86AudioRaiseVolume, exec, ~/nix/home-manager/eww/scripts/incvol.sh"
+  ",XF86AudioLowerVolume, exec, ~/nix/home-manager/eww/scripts/decvol.sh"
   ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
   ",XF86MonBrightnessUp, exec, brightnessctl s 10%+"
@@ -357,7 +363,7 @@ bindel = [
   ", XF86AudioPrev, exec, playerctl previous"
   ", XF86AudioStop, exec, playerctl stop"
   # Laptop close
-  ", switch:on:Lid Switch, exec, hyprlock & hyprctl dispatch dpms off"
+  ", switch:on:Lid Switch, exec, hyprctl dispatch dpms off & hyprlock"
   ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
 ];
 
@@ -393,6 +399,33 @@ windowrulev2 = [
   # Fix some dragging issues with XWayland
   "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
 ];
+
+"plugin:dynamic-cursors" = {
+  enabled = true;
+  mode = "stretch";
+  threshold = 2;
+  tilt = {
+    limit = 5000;
+    function = "negative_quadratic";
+    window = 100;
+  };
+  rotate = {
+    length = 20;
+    offset = 0.0;
+  };
+  stretch = {
+    limit = 2000;
+    function = "quadratic";
+    window = 100;
+  };
+  hyprcursor = {
+    nearest = 1;
+    enabled = true;
+    resolution = -1;
+    fallback = "clientside";
+  };
+  shake.enabled = false;
+};
 
     };
   };

@@ -1,0 +1,21 @@
+(defwidget volumebox []
+  (box :class "volbox"
+    :orientation "v"
+    :hexpand false
+    ; (box :class "numicon"
+    ;   :orientation "h"
+    ;   :hexpand false
+      ; (label :class "bigicon"
+      ;   :text {volicon})
+    (label :class "percent"
+      :text "${volumedyn}% ${volicon}")
+    ; )
+    (progress :class "volbar"
+      :orientation "h"
+      :value {volumedyn}
+      :height "100%"))
+      )
+
+
+(defvar volumedyn 0)
+(defvar volicon "N/A")

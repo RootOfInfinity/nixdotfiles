@@ -70,3 +70,23 @@ $main: $blue;
 .battery_bar>trough>progress {
   min-width: 30px;
 }
+
+// volumebox
+
+.volbox {
+  color: rgba(0, 0, 0, 0.0);
+}
+
+.percent {
+  color: $light;
+}
+
+.volbar>trough>progress {
+  min-height: 30px;
+  background-color: #FFFFFF;
+}
+
+.volbar>trough {
+  min-height: 30px;
+  background-color: rgba(0, 0, 0, 0.0);
+}

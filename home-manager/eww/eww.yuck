@@ -23,6 +23,7 @@
 (include "./bar.yuck")
 (include "./powermenu.yuck")
 (include "./powerwidgets.yuck")
+(include "./volumebox.yuck")
 
 
 
@@ -57,3 +58,15 @@
     :exclusive true
     (powermenu))
 
+(defwindow volumebox []
+    :monitor 0
+    :hexpand false
+    :vexpand false
+    :geometry (geometry
+        :anchor "bottom center"
+        :x "0px" :y "10px"
+        :width "70%")
+    :stacking "fg"
+    :focusable false
+    :exclusive false
+    (volumebox))

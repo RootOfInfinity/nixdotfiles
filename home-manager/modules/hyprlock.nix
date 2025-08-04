@@ -24,6 +24,14 @@
           valign = "bottom";
           position = "-200, 100";
         }
+        {
+          text = "cmd[update:1000] acpi | awk -F ', ' '{print $2}'";
+          font_size = 40;
+          font_family = "BigBlueTerm Plus Nerd Font Mono";
+          halign = "right";
+          valign = "top";
+          position = "-100, -100";
+        }
       ];
     };
   };

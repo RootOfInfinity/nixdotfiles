@@ -20,6 +20,10 @@
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
     }; 
+    hypr-dynamic-cursors = {
+      url = "github:VirtCode/hypr-dynamic-cursors";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -63,6 +67,7 @@
               config.allowUnfree = true;
             };
             inherit hyprland;
+            hypr-dyn-cursors = inputs.hypr-dynamic-cursors;
             inherit hyprsplit;
           };
           pkgs = pkgs.legacyPackages.${system};

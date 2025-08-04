@@ -38,6 +38,14 @@
     };
   };
 
+
+  # -- CACHIX -- #
+  # nix.settings = {
+  #   substituters = ["https://hyprland.cachix.org"];
+  #   trusted-substituters = ["https://hyprland.cachix.org"];
+  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  # };
+
   # -- DIGISPARK CONFIG -- #
   # UDEV Rules for Micronucleus boards including the Digispark.
   # This file must be placed at:
@@ -70,6 +78,7 @@
   # -- FLASHDRIVE SETTINGS -- #
   services.devmon.enable = true;
   services.gvfs.enable = true;
+  services.tumbler.enable = true;
   services.udisks2.enable = true;
 
 

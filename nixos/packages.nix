@@ -48,6 +48,10 @@
     vlc
     mpv
     melonDS
+    kdePackages.kdenlive
+    mtpfs
+    qrscan
+    webcamoid
 
 
     
@@ -87,6 +91,7 @@
     brightnessctl
     acpi
     todo
+    pmutils
 
     # docker stuff
     # docker_26
