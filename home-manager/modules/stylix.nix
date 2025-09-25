@@ -14,7 +14,16 @@
     };
     fonts = {
       # serif = config.stylix.fonts.monospace;
-      sansSerif = config.stylix.fonts.monospace;
+      # serif = {
+      #   package = pkgs-unstable.nerd-fonts.profont;
+      #   name = "Profont Nerd Font Mono";
+      # };
+      sansSerif = {
+        # package = pkgs-unstable.nerd-fonts.profont;
+        # name = "Profont Nerd Font Mono";
+        package = pkgs-unstable.nerd-fonts.bigblue-terminal;
+        name = "BigBlueTermPlus Nerd Font Mono";
+      };
       monospace = {
         package = pkgs-unstable.nerd-fonts.bigblue-terminal;
         name = "BigBlueTermPlus Nerd Font Mono";

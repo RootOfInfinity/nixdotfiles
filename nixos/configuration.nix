@@ -190,7 +190,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rootofinfinity = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "networkmanager" "dialout" ]; # Enable ‘sudo’ for the user.
   };
 
 
@@ -198,6 +198,7 @@
   # $ nix search wget
   fonts.packages = with pkgs-unstable; [
     nerd-fonts.bigblue-terminal
+    nerd-fonts.profont
   ];
 
   # -- DONT REALLY KNOW FR -- #

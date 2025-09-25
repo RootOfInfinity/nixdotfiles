@@ -30,6 +30,11 @@
   # powerManagement.enable = true;
 
   services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.lidSwitchExternalPower = "suspend";
+
+  services.libinput.mouse = {
+    naturalScrolling = true;
+    accelSpeed = "-0.5";
+  };
   
 }
