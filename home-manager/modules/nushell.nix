@@ -1,11 +1,13 @@
-{
+{ pkgs-unstable, ...  }:{
   programs.nushell = {
     enable = true;
+    package = pkgs-unstable.nushell;
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/nix --impure";
       upgrade = "sudo nixos-rebuild switch --flake ~/nix --impure --upgrade";
       homebuild = "home-manager switch --flake ~/nix";
       cd = "z";
+      fg = "job unfreeze";
     };
     extraConfig = /*nu*/ ''
       $env.config.show_banner = false

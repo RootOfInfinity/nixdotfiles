@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; [
     vim 
     helix
+    slint-lsp
     wget
     tor-browser
     discord
@@ -51,7 +52,8 @@
     kdePackages.kdenlive
     mtpfs
     qrscan
-    webcamoid
+    cheese
+    ciscoPacketTracer8
 
 
     
@@ -78,6 +80,8 @@
     eww
     yazi
     ueberzugpp
+    arduino-ide
+    arduino-cli
     
 
     #for hyprland
