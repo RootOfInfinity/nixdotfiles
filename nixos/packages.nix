@@ -10,6 +10,11 @@
     easyeffects
     htop
     element-desktop
+    warpinator
+    simple64
+    nestopia-ue
+    libresprite
+    ldtk
     
     fastfetch
     home-manager

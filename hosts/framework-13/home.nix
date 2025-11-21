@@ -7,10 +7,10 @@
   ];
 
   stylix.fonts.sizes = {
-    applications = 12;
-    desktop = 12;
-    terminal = 10;
-    popups = 10;
+    # applications = 14;
+    # desktop = 14;
+    # terminal = 10;
+    # popups = 14;
   };
 
 }
