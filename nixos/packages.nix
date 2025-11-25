@@ -15,6 +15,9 @@
     nestopia-ue
     libresprite
     ldtk
+    # for prog competition
+    vscodium-fhs
+    eclipses.eclipse-java
     
     fastfetch
     home-manager
