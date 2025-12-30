@@ -364,8 +364,8 @@ bindel = [
   ", XF86AudioPrev, exec, playerctl previous"
   ", XF86AudioStop, exec, playerctl stop"
   # Laptop close
-  ", switch:on:Lid Switch, exec, hyprctl dispatch dpms off & hyprlock"
-  ", switch:off:Lid Switch, exec, hyprctl dispatch dpms on"
+  ", switch:on:Lid Switch, exec, hyprlock"
+  # ", switch:off:Lid Switch, exec, "
 ];
 
 # bindl = [
