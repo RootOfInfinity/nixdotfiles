@@ -1,7 +1,12 @@
-{ pkgs, pkgs-unstable, pkgs-old, ...}:
+{
+  pkgs,
+  pkgs-unstable,
+  pkgs-old,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
     helix
     slint-lsp
     wget
@@ -18,7 +23,12 @@
     # for prog competition
     vscodium-fhs
     eclipses.eclipse-java
-    
+    gimp
+    tio
+    protonup-rs
+    dolphin-emu
+    i2pd
+
     fastfetch
     home-manager
     nil
@@ -46,7 +56,10 @@
     usbutils
     udiskie
     udisks
-    rustup
+    pkgs-unstable.rustup
+    pkgs-unstable.cargo-cross
+    lld_20
+    llvmPackages_20.libcxxClang
     prismlauncher
     python3
     pwntools
@@ -59,12 +72,9 @@
     melonDS
     kdePackages.kdenlive
     mtpfs
-    qrscan
     cheese
     ciscoPacketTracer8
 
-
-    
     gcc
     btop
     feh
@@ -72,7 +82,7 @@
     burpsuite
     r2modman
     steam-run-free
-    zulu23
+    zulu25
     ghidra
     gdb
     gef
@@ -90,13 +100,13 @@
     ueberzugpp
     arduino-ide
     arduino-cli
-    
 
     #for hyprland
     dunst
     libnotify
     swww
-    rofi-wayland
+    rofi
+    rofimoji
     playerctl
     hyprland-workspaces
     bc
@@ -111,8 +121,12 @@
     # docker-compose-language-service
     # yaml-language-server
     # mysql-workbench
-    
 
+    cups-brother-hll2350dw
+    piper
   ];
-  
+  nixpkgs.config.permittedInsecurePackages = [
+    "ciscoPacketTracer8-8.2.2"
+  ];
+
 }

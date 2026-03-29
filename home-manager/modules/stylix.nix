@@ -1,10 +1,15 @@
-{ pkgs, pkgs-unstable, config, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  config,
+  ...
+}:
 {
   stylix = {
     enable = true;
     autoEnable = true;
     # homeManagerIntegration.autoImport = true;
-    image = ../files/CrossGruvbox.png;
+    image = ../files/Cross_ecc2_24-25.png;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
     polarity = "dark";
     cursor = {
@@ -29,7 +34,7 @@
         name = "BigBlueTermPlus Nerd Font Mono";
       };
       emoji = {
-        package = pkgs.noto-fonts-emoji;
+        package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
     };

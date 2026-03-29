@@ -2,10 +2,17 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, pkgs-unstable, hyprland, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-unstable,
+  hyprland,
+  ...
+}:
 
 {
-  imports = [ 
+  imports = [
     /etc/nixos/hardware-configuration.nix
     ./stylixconfig.nix
   ];
@@ -13,13 +20,16 @@
   # -- NIXOS SETTINGS -- #
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   system.autoUpgrade = {
     enable = true;
     dates = "weekly";
   };
-  
+
   nix.gc = {
     automatic = true;
     dates = "daily";
@@ -28,7 +38,7 @@
 
   nix.settings.auto-optimise-store = true;
 
-  # -- HARDWARE SETTINGS -- #  
+  # -- HARDWARE SETTINGS -- #
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   # hardware.bluetooth.powerOnBoot = true;
@@ -37,7 +47,6 @@
       Experimental = true;
     };
   };
-
 
   # -- CACHIX -- #
   # nix.settings = {
@@ -64,7 +73,9 @@
     KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", OWNER:="rootofinfinity", ENV{ID_MM_DEVICE_IGNORE}="1"
   '';
 
-    
+  # for logitech mx master 4
+  services.ratbagd.enable = true;
+
   qt.enable = true;
   services.flatpak.enable = true;
 
@@ -75,12 +86,18 @@
   # If ya wanna use mangohud, gamescope, or gamemode, put it in the
   # launch options like `mangohud %command%`
 
+  # -- I2PD SETTINGS -- #
+  services.i2pd = {
+    enable = true;
+    ssu2.enable = true;
+    proto.http.port = 7072;
+  };
+
   # -- FLASHDRIVE SETTINGS -- #
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
   services.udisks2.enable = true;
-
 
   # -- VIRTUAL MACHINE MANAGER -- #
   programs.virt-manager.enable = true;
@@ -88,19 +105,20 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.waydroid.enable = true;
-  
+  # virtualisation.docker.enable = true;
+  # users.groups.docker.members = [ "rootofinfinity" ];
+  virtualisation.podman.enable = true;
 
   # -- BOOT LOADER SETTINGS -- #
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-
   # -- NETWORKING SETTINGS -- #
   # networking.hostName = "Declared in user.nix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   # networking.nameservers = [ "8.8.8.8" ];
   # networking.defaultGateway6 = {
   #   address = "fe80::1";
@@ -118,12 +136,6 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-
-
-
-
-
 
   # -- I DONT KNOW LOL -- #
   # Select internationalisation properties.
@@ -155,8 +167,6 @@
     # package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-  
-  
 
   # -- SOUND SETTINGS -- #
   security.rtkit.enable = true;
@@ -182,7 +192,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-
   # -- KEPT JUST CAUSE -- #
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -190,9 +199,15 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.rootofinfinity = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "networkmanager" "dialout" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "input"
+      "networkmanager"
+      "dialout"
+      "i2pd"
+      # "docker"
+    ]; # Enable ‘sudo’ for the user.
   };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -248,4 +263,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
