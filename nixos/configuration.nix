@@ -89,8 +89,20 @@
   # -- I2PD SETTINGS -- #
   services.i2pd = {
     enable = true;
+    address = "127.0.0.1";
     ssu2.enable = true;
-    proto.http.port = 7072;
+    proto.http = {
+      enable = true;
+      port = 7072;
+    };
+    proto.httpProxy.enable = true;
+    proto.sam.enable = true;
+    proto.i2cp = {
+      enable = true;
+      address = "127.0.0.1";
+      port = 7654;
+    };
+
   };
 
   # -- FLASHDRIVE SETTINGS -- #

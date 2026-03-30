@@ -1,4 +1,3 @@
-
 {
   description = "My sys config";
 
@@ -18,7 +17,7 @@
     hyprsplit = {
       url = "github:shezdy/hyprsplit";
       inputs.hyprland.follows = "hyprland";
-    }; 
+    };
     hypr-dynamic-cursors = {
       url = "github:VirtCode/hypr-dynamic-cursors";
       inputs.hyprland.follows = "hyprland";
@@ -33,11 +32,23 @@
     xremap.url = "github:xremap/nix-flake";
   };
 
-  outputs = { nixpkgs, home-manager, nixpkgs-unstable, nixpkgs-old, stylix, hyprland, hyprsplit, xremap, ... }@inputs: 
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      nixpkgs-unstable,
+      nixpkgs-old,
+      stylix,
+      hyprland,
+      hyprsplit,
+      xremap,
+      ...
+    }@inputs:
     let
       # system = "x86_64-linux";
       linux = "x86_64-linux";
-      mkSystem = pkgs: system: hostname:
+      mkSystem =
+        pkgs: system: hostname:
         pkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -52,9 +63,10 @@
             ./hosts/${hostname}/user.nix
             stylix.nixosModules.stylix
           ];
-          
+
         };
-      mkHome = pkgs: system: username: host:
+      mkHome =
+        pkgs: system: username: host:
         home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = {
             pkgs-unstable = import nixpkgs-unstable {
@@ -76,19 +88,19 @@
               home.homeDirectory = "/home/${username}";
             }
             ./hosts/${host}/home.nix
-            stylix.homeManagerModules.stylix
+            stylix.homeModules.stylix
           ];
         };
-    in {
+    in
+    {
 
-
-    nixosConfigurations = {
-      framework-13 = mkSystem nixpkgs linux "framework-13";
-      nixos = mkSystem nixpkgs linux "nixos";
+      nixosConfigurations = {
+        framework-13 = mkSystem nixpkgs linux "framework-13";
+        nixos = mkSystem nixpkgs linux "nixos";
+      };
+      homeConfigurations = {
+        "rootofinfinity@nixos" = mkHome nixpkgs linux "rootofinfinity" "nixos";
+        "rootofinfinity@framework-13" = mkHome nixpkgs linux "rootofinfinity" "framework-13";
+      };
     };
-    homeConfigurations = {
-      "rootofinfinity@nixos" = mkHome nixpkgs linux "rootofinfinity" "nixos";
-      "rootofinfinity@framework-13" = mkHome nixpkgs linux "rootofinfinity" "framework-13";
-    };
-  };
 }

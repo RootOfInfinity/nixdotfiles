@@ -1,8 +1,14 @@
 {
   programs.git = {
     enable = true;
-    diff-highlight.enable = true;
-    userEmail = "numbersdev@protonmail.com";
-    userName = "William Campbell";
+    settings.user = {
+      email = "numbersdev@protonmail.com";
+      name = "William Campbell";
+    };
+
+  };
+  programs.diff-highlight = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }
