@@ -39,7 +39,14 @@
   nix.settings.auto-optimise-store = true;
 
   # -- HARDWARE SETTINGS -- #
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    package = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
+
+    enable32Bit = true;
+    package32 =
+      hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.pkgsi686Linux.mesa;
+  };
   hardware.bluetooth.enable = true;
   # hardware.bluetooth.powerOnBoot = true;
   hardware.bluetooth.settings = {
@@ -49,11 +56,11 @@
   };
 
   # -- CACHIX -- #
-  # nix.settings = {
-  #   substituters = ["https://hyprland.cachix.org"];
-  #   trusted-substituters = ["https://hyprland.cachix.org"];
-  #   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  # };
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  };
 
   # -- DIGISPARK CONFIG -- #
   # UDEV Rules for Micronucleus boards including the Digispark.
@@ -78,6 +85,9 @@
 
   qt.enable = true;
   services.flatpak.enable = true;
+
+  # -- DIRENV SETTINGS -- #
+  programs.direnv.enable = true;
 
   # -- STEAM SETTINGS -- #
   programs.steam.enable = true;
@@ -124,6 +134,7 @@
   # -- BOOT LOADER SETTINGS -- #
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.editor = false; # if activated, someone could get root access.
   boot.loader.efi.canTouchEfiVariables = true;
 
   # -- NETWORKING SETTINGS -- #
@@ -176,8 +187,8 @@
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
-    # package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # -- SOUND SETTINGS -- #

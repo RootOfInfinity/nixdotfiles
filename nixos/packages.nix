@@ -27,14 +27,15 @@
     tio
     protonup-rs
     dolphin-emu
-    i2pd
+    ungoogled-chromium
+    signal-desktop
 
     fastfetch
     home-manager
     nil
     dust
     bat
-    zellij
+    # zellij
     ripgrep
     irust
     bacon
@@ -56,8 +57,6 @@
     usbutils
     udiskie
     udisks
-    pkgs-unstable.rustup
-    pkgs-unstable.cargo-cross
     lld_20
     llvmPackages_20.libcxxClang
     prismlauncher

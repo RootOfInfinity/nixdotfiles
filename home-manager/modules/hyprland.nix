@@ -3,6 +3,7 @@
   hyprsplit,
   pkgs,
   hypr-dyn-cursors,
+  pkgs-unstable,
   ...
 }:
 {
@@ -11,7 +12,7 @@
     # withUWSM = true;
     xwayland.enable = true;
     package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     systemd.enable = false;
 
     ###############
@@ -22,7 +23,8 @@
       # split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       # hyprsplit.packages.default
       # pkgs.hyprlandPlugins.hyprsplit
-      pkgs.hyprlandPlugins.hypr-dynamic-cursors
+      # pkgs-unstable.hyprlandPlugins.hypr-dynamic-cursors
+      hypr-dyn-cursors.packages.${pkgs.system}.hypr-dynamic-cursors
     ];
     # extraConfig = ''
     #     plugin = ${hypr-dyn-cursors.packages.${pkgs.system}.hypr-dynamic-cursors}/lib/libhypr-dynamic-cursors.so
@@ -63,6 +65,26 @@
         "8, monitor:DP-1"
         "9, monitor:DP-1"
         "10, monitor:DP-1"
+
+        # new stuff
+        # Main work should be dwindle;
+        # Games should be monocle;
+        # One scroll window to try it out
+        # 11 should be scroll for utilities
+        # 12 should be gamezone
+        "9, oncreatedempty: alacritty -e nmtui"
+
+        "11, layout:scrolling"
+        "11, oncreatedempty: alacritty -e bluetuith"
+        "11, oncreatedempty: alacritty -e cmus"
+        "11, oncreatedempty: alacritty -e pulsemixer"
+        "11, oncreatedempty: easyeffects"
+        "12, layout:monocle"
+
+        "7, layout:scrolling"
+
+        "s[true], gapsout:100"
+
       ];
 
       ###################
@@ -90,6 +112,11 @@
         "hyprctl dispatch workspace 1"
         "mpv --no-video ~/nix/home-manager/files/PremonitionStartupSound.mp3"
         "[workspace special:quick_term silent] alacritty --class 'floatcritty' -e nu -e fastfetch"
+        "[workspace 9] alacritty -e nmtui"
+        "[workspace 11] alacritty -e bluetuith"
+        "[workspace 11] alacritty -e cmus"
+        "[workspace 11] alacritty -e pulsemixer"
+        "[workspace 11] easyeffects"
         # "~/nix/home-manager/eww/scripts/music_too_long.sh"
       ];
       # exec-once = $terminal
@@ -213,6 +240,10 @@
         new_status = "master";
       };
 
+      scrolling = {
+        # defaults are good
+      };
+
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
         force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
@@ -263,7 +294,9 @@
       bind = [
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive,"
-        "$mainMod, M, exit,"
+        "$mainMod CTRL, C, forcekillactive,"
+
+        "$mainMod ALT, M, exec, uwsm stop"
         "$mainMod, E, exec, $guiFileManager"
         # "$mainMod, F, exec, $fileManager"
         "$mainMod, F, fullscreen, 0"
@@ -279,7 +312,7 @@
         "$mainMod, PRINT, exec, hyprshot -m window -o ~/Pictures/Screenshots -z"
         " , PRINT, exec, hyprshot -m output -o ~/Pictures/Screenshots"
         "$mainMod SHIFT, PRINT, exec, hyprshot -m region -o ~/Pictures/Screenshots -z"
-        "$mainMod, U, togglesplit, # dwindle"
+        # "$mainMod, U, togglesplit, # dwindle"
         # "$mainMod, S, split:swapactiveworkspaces"
         # "$mainMod, W, exec, ~/nix/home-manager/scripts/reload-waybar.sh"
         # Move focus with mainMod + hjkl
@@ -287,11 +320,9 @@
         "$mainMod, L, movefocus, r"
         "$mainMod, K, movefocus, u"
         "$mainMod, J, movefocus, d"
-        # Gonna make movable + resizeable windows with keyboard.
-        "$mainMod CTRL, H, resizeactive, -30 0"
-        "$mainMod CTRL, L, resizeactive, 30 0"
-        "$mainMod CTRL, K, resizeactive, 0 -30"
-        "$mainMod CTRL, J, resizeactive, 0 30"
+
+        # For monocle
+        "$mainMod, N, layoutmsg, cyclenext"
 
         "$mainMod SHIFT, H, movewindow, l"
         "$mainMod SHIFT, L, movewindow, r"
@@ -364,6 +395,15 @@
         # ", switch:off:Lid Switch, exec, "
       ];
 
+      binde = [
+        # Gonna make movable + resizeable windows with keyboard.
+        "$mainMod CTRL, H, resizeactive, -30 0"
+        "$mainMod CTRL, L, resizeactive, 30 0"
+        "$mainMod CTRL, K, resizeactive, 0 -30"
+        "$mainMod CTRL, J, resizeactive, 0 30"
+
+      ];
+
       # bindl = [
       #   # Requires playerctl
       #   ", XF86AudioNext, exec, playerctl next"
@@ -385,16 +425,16 @@
       # Example windowrule v2
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
+      # windowrule = [
+      #   "float,class:^floatcritty$"
+      #   "size 800 600,class:^floatcritty$"
+      #   "move 100 100,class:^floatcritty$"
+      # ];
       windowrule = [
-        "float,class:^floatcritty$"
-        "size 800 600,class:^floatcritty$"
-        "move 100 100,class:^floatcritty$"
-      ];
-      windowrulev2 = [
         # Ignore maximize requests from apps. You'll probably like this.
-        "suppressevent maximize, class:.*"
+        # "suppressevent maximize, class:.*"
         # Fix some dragging issues with XWayland
-        "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+        # "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
 
       "plugin:dynamic-cursors" = {
