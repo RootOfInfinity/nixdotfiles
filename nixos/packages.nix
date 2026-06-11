@@ -73,7 +73,8 @@
     kdePackages.kdenlive
     mtpfs
     cheese
-    ciscoPacketTracer8
+    # ciscoPacketTracer8
+    # I don't think I need this anymore
 
     gcc
     btop
