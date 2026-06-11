@@ -29,6 +29,7 @@
     dolphin-emu
     ungoogled-chromium
     signal-desktop
+    pkgs-unstable.lutris
 
     fastfetch
     home-manager

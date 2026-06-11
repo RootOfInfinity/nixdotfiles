@@ -93,6 +93,9 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+  programs.steam.package = pkgs-unstable.steam;
+  environment.variables."STEAM_EXTRA_COMPAT_TOOLS_PATHS" =
+    "/home/rootofinfinity/.steam/root/compatibilitytools.d";
   # If ya wanna use mangohud, gamescope, or gamemode, put it in the
   # launch options like `mangohud %command%`
 
